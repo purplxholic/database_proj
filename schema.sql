@@ -23,23 +23,20 @@ CREATE TABLE Users_Songs (uid CHAR(10),
 	                    FOREIGN KEY (uid) REFERENCES Users (uid),
 	                    FOREIGN KEY (sid) REFERENCES Songs (sid));
                                                     
-CREATE TABLE Feedbacks (fid CHAR(10) PRIMARY KEY, 
-						uid CHAR(10) NOT NULL,
+CREATE TABLE Feedbacks (uid CHAR(10) NOT NULL,
 						sid CHAR(10) NOT NULL, 
-                        score INTEGER NOT NULL,
+                        score INTEGER NOT NULL CHECK (score>=0 AND score<=10),
                         postDate DATE NOT NULL,
                         comments VARCHAR(250),
-                        UNIQUE (uid,sid),
+                        PRIMARY KEY (uid,sid),
                         FOREIGN KEY (uid) REFERENCES Users (uid),
                         FOREIGN KEY (sid) REFERENCES Songs (sid));
                                                 
 CREATE TABLE Ratings (uid CHAR(10),
-					fid CHAR(10),
-					score INTEGER,
-					PRIMARY KEY(uid, fid),
-					FOREIGN KEY (fid) REFERENCES Feedbacks (fid));
-                                            
-                                        
-                                        
-
+					fuid CHAR(10),
+					sid CHAR(10),
+					score INTEGER CHECK (score>=0 AND score<=2),
+					PRIMARY KEY(uid, fuid, sid),
+					FOREIGN KEY (fuid, sid) REFERENCES Feedbacks (uid,sid),
+                    CHECK (uid <> fuid));
                                         
