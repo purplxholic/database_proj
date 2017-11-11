@@ -19,7 +19,6 @@ CREATE TABLE Songs (sid CHAR(10) PRIMARY KEY,
 
 CREATE TABLE Users_Songs (uid CHAR(10),
 						sid CHAR(10),
-						uid CHAR(10),
 	                    PRIMARY KEY (uid, sid),
 	                    FOREIGN KEY (uid) REFERENCES Users (uid),
 	                    FOREIGN KEY (sid) REFERENCES Songs (sid));
