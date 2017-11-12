@@ -9,7 +9,7 @@ sudo apt-get update
 sudo apt-get install mysql-server
 mysql_secure_installation
 
-# give priveledge to guest user on command line
+# give PRIVILEGES to guest user on command line
 mysql -u root -p
 CREATE USER 'guest'@'localhost' IDENTIFIED BY 'password';
 GRANT ALL PRIVILEGES ON * . * TO 'newuser'@'localhost';
