@@ -14,6 +14,8 @@ CREATE TABLE Songs (sid CHAR(10) PRIMARY KEY,
 					gid CHAR(10),
 					releaseDate DATE NOT NULL,
 					numDownloads INTEGER NOT NULL DEFAULT 0,
+					numLicense INTEGER NOT NULL,
+					CHECK (numDownloads <= numLicense),
 					FOREIGN KEY (aid) REFERENCES Artists (aid),
 					FOREIGN KEY (gid) REFERENCES Genres (gid));
 
