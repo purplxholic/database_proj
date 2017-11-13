@@ -12,11 +12,15 @@ mysql_secure_installation
 # give PRIVILEGES to guest user on command line
 mysql -u root -p
 CREATE USER 'guest'@'localhost' IDENTIFIED BY 'password';
-GRANT ALL PRIVILEGES ON * . * TO 'newuser'@'localhost';
+GRANT ALL PRIVILEGES ON * . * TO 'guest'@'localhost';
 FLUSH PRIVILEGES;
 
 #create database
 CREATE DATABASE music_store
+
+#install python and django
+sudo apt-get install python
+pip install Django
 
 #quit and run
 python manage.py runserver
