@@ -18,7 +18,5 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^statistics/', include('statistics.urls')),
-    url(r'^inventory_system/', include('inventory_system.urls'))
-    url(r'^music/', include('feedback_rating.urls')),
+    url(r'^music/', include('feedback_rating.urls'))
 ]
