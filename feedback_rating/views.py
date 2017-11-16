@@ -5,7 +5,7 @@ from django.shortcuts import render
 
 from django.db import connection
 
-from utils import dictfetchall
+from feedback_rating.utils import dictfetchall
 
 # Create your views here.
 def music_info(request, pk):
