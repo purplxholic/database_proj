@@ -1,7 +1,7 @@
 --CREATE TABLE Users (uid CHAR(10) PRIMARY KEY,
 --					login VARCHAR(50) UNIQUE NOT NULL,
 --					password VARCHAR(20) NOT NULL);
-
+--random comment
 INSERT INTO Users (uid, login, password)
 VALUES
 ('1543016742','Marleen Stoute','PFCqXQqXTL'),
