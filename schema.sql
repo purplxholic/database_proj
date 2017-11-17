@@ -19,7 +19,7 @@ CREATE TABLE Songs (sid CHAR(10) PRIMARY KEY,
 					FOREIGN KEY (aid) REFERENCES Artists (aid),
 					FOREIGN KEY (gid) REFERENCES Genres (gid));
 
-CREATE TABLE Users_Songs (uid CHAR(10),
+CREATE TABLE Purchase (uid CHAR(10),
 						sid CHAR(10),
 	                    PRIMARY KEY (uid, sid),
 	                    FOREIGN KEY (uid) REFERENCES Users (uid),
@@ -41,3 +41,4 @@ CREATE TABLE Ratings (uid CHAR(10),
 					PRIMARY KEY(uid, fuid, sid),
 					FOREIGN KEY (fuid, sid) REFERENCES Feedbacks (uid,sid),
                     CHECK (uid <> fuid));
+
