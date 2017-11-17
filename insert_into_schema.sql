@@ -109,13 +109,37 @@ VALUES
 --					name VARCHAR(50) NOT NULL);
 --INSERT INTO Artists(aid, name)
 --VALUES
---
---
---
+INSERT INTO Artists(aid, name)
+VALUES
+('aid1','Metallica')
+('aid2','The Beatles')
+('aid3','Bee Gees')
+('aid4','Red Hot Chilli Pepprs')
+('aid5','Eminem')
+('aid6','Akon')
+('aid7','Bryan Adams')
+('aid8','Justin Bieber')
+('aid9','Daft Punk')
+('aid10','Hillsong United');
+
 --
 --CREATE TABLE Genres (gid CHAR(10) PRIMARY KEY,
 --					name VARCHAR(50) NOT NULL);
---
+INSERT INTO Genres
+VALUES
+('gid1','Heavy Metal')
+('gid2','Pop')
+('gid3','Disco')
+('gid4','Alternative Rock')
+('gid5','Hip-hop')
+('gid6','Reggae')
+('gid7','Rock')
+('gid8','Hip-hop')
+('gid9','Disco')
+('gid10','Christian Rock'); --I really ran out of genres I could think of at 2am, sorry! I am a Buddhist btw :P
+
+
+
 --CREATE TABLE Songs (sid CHAR(10) PRIMARY KEY,
 --					name VARCHAR(50) NOT NULL,
 --					aid CHAR(10) NOT NULL,
