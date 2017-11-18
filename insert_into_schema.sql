@@ -205,13 +205,13 @@ VALUES
 
 
 
---CREATE TABLE Purchase (uid CHAR(20),
+--CREATE TABLE Purchases (uid CHAR(20),
 --						sid CHAR(20),
 --	                    PRIMARY KEY (uid, sid),
 --	                    FOREIGN KEY (uid) REFERENCES Users (uid),
 --	                    FOREIGN KEY (sid) REFERENCES Songs (sid));
 
-INSERT INTO Purchase
+INSERT INTO Purchases
 VALUES
 ('1543016742','metallica1'   )
 ('5507545360','metallica2'   )

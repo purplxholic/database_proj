@@ -19,7 +19,7 @@ CREATE TABLE Songs (sid CHAR(20) PRIMARY KEY,
 					FOREIGN KEY (aid) REFERENCES Artists (aid),
 					FOREIGN KEY (gid) REFERENCES Genres (gid));
 
-CREATE TABLE Purchase (uid CHAR(20),
+CREATE TABLE Purchases (uid CHAR(20),
 						sid CHAR(20),
 	                    PRIMARY KEY (uid, sid),
 	                    FOREIGN KEY (uid) REFERENCES Users (uid),
