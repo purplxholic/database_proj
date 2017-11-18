@@ -1,7 +1,7 @@
---CREATE TABLE Users (uid CHAR(10) PRIMARY KEY,
+--CREATE TABLE Users (uid CHAR(20) PRIMARY KEY,
 --					login VARCHAR(50) UNIQUE NOT NULL,
 --					password VARCHAR(20) NOT NULL);
---random comment
+
 INSERT INTO Users (uid, login, password)
 VALUES
 ('1543016742','Marleen Stoute','PFCqXQqXTL'),
@@ -105,7 +105,7 @@ VALUES
 ('4167462128','Antonette Arzu','s2IK45ZMNa'),
 ('4904556412','Dusty Decka','xr2a0RYjyF');
 
---CREATE TABLE Artists (aid CHAR(10) PRIMARY KEY,
+--CREATE TABLE Artists (aid CHAR(20) PRIMARY KEY,
 --					name VARCHAR(50) NOT NULL);
 --INSERT INTO Artists(aid, name)
 --VALUES
@@ -123,7 +123,7 @@ VALUES
 ('aid10','Hillsong United');
 
 --
---CREATE TABLE Genres (gid CHAR(10) PRIMARY KEY,
+--CREATE TABLE Genres (gid CHAR(20) PRIMARY KEY,
 --					name VARCHAR(50) NOT NULL);
 INSERT INTO Genres
 VALUES
@@ -142,8 +142,8 @@ VALUES
 
 --CREATE TABLE Songs (sid CHAR(20) PRIMARY KEY,
 --					name VARCHAR(50) NOT NULL,
---					aid CHAR(10) NOT NULL,
---					gid CHAR(10),
+--					aid CHAR(20) NOT NULL,
+--					gid CHAR(20),
 --					releaseDate DATE NOT NULL,
 --					numDownloads INTEGER NOT NULL DEFAULT 0,
 --					numLicense INTEGER NOT NULL,
@@ -205,8 +205,8 @@ VALUES
 
 
 
---CREATE TABLE Purchase (uid CHAR(10),
---						sid CHAR(10),
+--CREATE TABLE Purchase (uid CHAR(20),
+--						sid CHAR(20),
 --	                    PRIMARY KEY (uid, sid),
 --	                    FOREIGN KEY (uid) REFERENCES Users (uid),
 --	                    FOREIGN KEY (sid) REFERENCES Songs (sid));
@@ -314,8 +314,8 @@ VALUES
 ('4167462128','hills4'       )
 ('4904556412','hills5'       );
 
---CREATE TABLE Feedbacks (uid CHAR(10) NOT NULL,
---						sid CHAR(10) NOT NULL,
+--CREATE TABLE Feedbacks (uid CHAR(20) NOT NULL,
+--						sid CHAR(20) NOT NULL,
 --                        score INTEGER NOT NULL CHECK (score>=0 AND score<=10),
 --                        postDate DATE NOT NULL,
 --                        comments VARCHAR(250),
@@ -323,9 +323,9 @@ VALUES
 --                        FOREIGN KEY (uid) REFERENCES Users (uid),
 --                        FOREIGN KEY (sid) REFERENCES Songs (sid));
 --
---CREATE TABLE Ratings (uid CHAR(10),
---					fuid CHAR(10),
---					sid CHAR(10),
+--CREATE TABLE Ratings (uid CHAR(20),
+--					fuid CHAR(20),
+--					sid CHAR(20),
 --					score INTEGER CHECK (score>=0 AND score<=2),
 --					PRIMARY KEY(uid, fuid, sid),
 --					FOREIGN KEY (fuid, sid) REFERENCES Feedbacks (uid,sid),
