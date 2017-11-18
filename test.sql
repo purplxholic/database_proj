@@ -1,6 +1,6 @@
 USE music_store;
 
-#DROP TABLE Ratings, Feedbacks, Users_Songs, Songs, Genres, Artists, Users;
+-- DROP TABLE Ratings, Feedbacks, Users_Songs, Songs, Genres, Artists, Users;
 
 INSERT INTO Users
 VALUES ('0000000000', 'user', 'password');
@@ -15,7 +15,7 @@ INSERT INTO Genres
 VALUES ('2222222222', 'Classical');
                                             
 INSERT INTO Songs 
-VALUES ('123456789', 'Somewhere over the Rainbow', '1111111111', '2222222222', '2016-09-30',0);
+VALUES ('123456789', 'Somewhere over the Rainbow', '1111111111', '2222222222', '2016-09-30',0, 1);
                                         
 INSERT INTO Feedbacks
 VALUES ('0000000000', '123456789', 10, '2016-10-01', 'Absolutely stunning rendition.');
