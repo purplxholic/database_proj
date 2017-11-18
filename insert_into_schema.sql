@@ -140,7 +140,7 @@ VALUES
 
 
 
---CREATE TABLE Songs (sid CHAR(10) PRIMARY KEY,
+--CREATE TABLE Songs (sid CHAR(20) PRIMARY KEY,
 --					name VARCHAR(50) NOT NULL,
 --					aid CHAR(10) NOT NULL,
 --					gid CHAR(10),
@@ -152,56 +152,57 @@ VALUES
 --					FOREIGN KEY (gid) REFERENCES Genres (gid));
 INSERT INTO Songs (sid, name, aid, gid, releaseDate, numDownloads, numLicense)
 VALUES
-('metallica1','For whom the Bell tolls','aid1', 'gid1', '1996-09-27',3,9001),
-('metallica2','Ride the Lightning','aid1', 'gid1', '1996-09-27',3,9001),
-('metallica3','Unforgiven','aid1', 'gid1', '1996-09-27',3,9001),
-('metallica4','Fade to Black','aid1', 'gid1', '1996-09-27',3,9001), --Aish's favorite
-('metallica5','Nothing Else Matters','aid1', 'gid1', '1996-09-27',3,9001),
-('beatles1','Here comes the sun','aid2', 'gid2', '1996-09-27',3,9001),
-('beatles2','I wanna hold your hand','aid2', 'gid2', '1996-09-27',3,9001),
-('beatles3','Hey Jude','aid2', 'gid2', '1996-09-27',3,9001),
-('beatles4','Help!','aid2', 'gid2', '1996-09-27',3,9001),
-('beatles5','Seargeant Peppers Lonely Hearts Club Band','aid2', 'gid2', '1996-09-27',3,9001),
-('beegees1','Staying Alive','aid3', 'gid3', '1996-09-27',2,9001),
-('beegees2','How deep is your love','aid3', 'gid3', '1996-09-27',2,9001),
-('beegees3','Night Fever','aid3', 'gid3', '1996-09-27',2,9001),
-('beegees4','I started a joke','aid3', 'gid3', '1996-09-27',2,9001),
-('beegees5','Too much heaven','aid3', 'gid3', '1996-09-27',2,9001),
-('rhcp1','Rain dance maggie','aid4', 'gid4', '1996-09-27',4,9001), --aww yeaaahhh \m/ this is the best!
-('rhcp2','Scar Tissue','aid4', 'gid4', '1996-09-27',4,9001),
-('rhcp3','Californication','aid4', 'gid4', '1996-09-27',4,9001),
-('rhcp4','Under the Bridge','aid4', 'gid4', '1996-09-27',4,9001),
-('rhcp15','Snow','aid4', 'gid4', '1996-09-27',4,9001),
-('mozart1','The Magic Flue','aid5', 'gid5', '1996-09-27',5,9001),
-('mozart2','Don Giovanni','aid5', 'gid5', '1996-09-27',5,9001),
-('mozart3','Requiem','aid5', 'gid5', '1996-09-27',5,9001),
-('mozart4','The Marriage of Figaro','aid5', 'gid5', '1996-09-27',5,9001),
-('mozart5','Clarinet Concerto','aid5', 'gid5', '1996-09-27',5,9001),
-('akon1','I wanna love you','aid6', 'gid6', '1996-09-27',6,9001),
-('akon2','Beautiful','aid6', 'gid6', '1996-09-27',6,9001),
-('akon3','Dangerous','aid6', 'gid6', '1996-09-27',6,9001),
-('akon4','Freedom','aid6', 'gid6', '1996-09-27',6,9001),
-('akon5','Blame it on me','aid6', 'gid6', '1996-09-27',6,9001),
-('bryanadams1','Summer of 69','aid7', 'gid7', '1996-09-27',7,9001),
-('bryanadams2','Open Road','aid7', 'gid7', '1996-09-27',7,9001), -- this mah jammmm
-('bryanadams3','Here I am','aid7', 'gid7', '1996-09-27',7,9001),
-('bryanadams4','Please forgive me','aid7', 'gid7', '1996-09-27',7,9001),
-('bryanadams5','All for Love','aid7', 'gid7', '1996-09-27',7,9001),
-('bustinjieber1','Despacito','aid8', 'gid8', '1996-09-27',8,9001), --yuk!
-('bustinjieber2','Baby','aid8', 'gid8', '1996-09-27',8,9001), --yuk!
-('bustinjieber3','Friends','aid8', 'gid8', '1996-09-27',8,9001), --yuk!
-('bustinjieber4','Love yourself','aid8', 'gid8', '1996-09-27',8,9001), --yuk!
-('bustinjieber5','Sorry','aid8', 'gid8', '1996-09-27',8,9001), --yuk!
-('daftpunk1','Get Lucky','aid9', 'gid9', '1996-09-27',9,9001),
-('daftpunk2','I feel it coming','aid9', 'gid9', '1996-09-27',9,9001),
-('daftpunk3','Giogio by Moroder','aid9', 'gid9', '1996-09-27',9,9001),
-('daftpunk4','Fragments of Time','aid9', 'gid9', '1996-09-27',9,9001),
-('daftpunk5','Veridis Quo','aid9', 'gid9', '1996-09-27',9,9001), --Fun fact: if you say veridis quo over and and over it sounds like very disco, which at faster speed sounds like disco-very which is the name of the Daft Punk album
-('hillsongunited1','One way Jesus','aid10', 'gid10', '1996-09-27',10,9001), --this is the only song I know actually lol
-('hillsongunited2','Ocean','aid10', 'gid10', '1996-09-27',10,9001),
-('hillsongunited3','Even when it hurts','aid10', 'gid10', '1996-09-27',10,9001),
-('hillsongunited4','Touch the sky','aid10', 'gid10', '1996-09-27',10,9001),
-('hillsongunited5','Hosanna','aid10', 'gid10', '1996-09-27',10,9001),
+('metallica1'   ,'For whom the Bell tolls','aid1', 'gid1', '1996-09-27',2,9001),
+('metallica2'   ,'Ride the Lightning','aid1', 'gid1', '1996-09-27',2,9001),
+('metallica3'   ,'Unforgiven','aid1', 'gid1', '1996-09-27',2,9001),
+('metallica4'   ,'Fade to Black','aid1', 'gid1', '1996-09-27',2,9001), --Aish's favorite
+('metallica5'   ,'Nothing Else Matters','aid1', 'gid1', '1996-09-27',2,9001),
+('beatles1'     ,'Here comes the sun','aid2', 'gid2', '1996-09-27',2,9001),
+('beatles2'     ,'I wanna hold your hand','aid2', 'gid2', '1996-09-27',2,9001),
+('beatles3'     ,'Hey Jude','aid2', 'gid2', '1996-09-27',2,9001),
+('beatles4'     ,'Help!','aid2', 'gid2', '1996-09-27',2,9001),
+('beatles5'     ,'Seargeant Peppers Lonely Hearts Club Band','aid2', 'gid2', '1996-09-27',2,9001),
+('beegees1'     ,'Staying Alive','aid3', 'gid3', '1996-09-27',2,9001),
+('beegees2'     ,'How deep is your love','aid3', 'gid3', '1996-09-27',2,9001),
+('beegees3'     ,'Night Fever','aid3', 'gid3', '1996-09-27',2,9001),
+('beegees4'     ,'I started a joke','aid3', 'gid3', '1996-09-27',2,9001),
+('beegees5'     ,'Too much heaven','aid3', 'gid3', '1996-09-27',2,9001),
+('rhcp1'        ,'Rain dance maggie','aid4', 'gid4', '1996-09-27',2,9001), --aww yeaaahhh \m/ this is the best!
+('rhcp2'        ,'Scar Tissue','aid4', 'gid4', '1996-09-27',2,9001),
+('rhcp3'        ,'Californication','aid4', 'gid4', '1996-09-27',2,9001),
+('rhcp4'        ,'Under the Bridge','aid4', 'gid4', '1996-09-27',2,9001),
+('rhcp5'        ,'Snow','aid4', 'gid4', '1996-09-27',2,9001),
+('mozart1'      ,'The Magic Flue','aid5', 'gid5', '1996-09-27',2,9001),
+('mozart2'      ,'Don Giovanni','aid5', 'gid5', '1996-09-27',2,9001),
+('mozart3'      ,'Requiem','aid5', 'gid5', '1996-09-27',2,9001),
+('mozart4'      ,'The Marriage of Figaro','aid5', 'gid5', '1996-09-27',2,9001),
+('mozart5'      ,'Clarinet Concerto','aid5', 'gid5', '1996-09-27',2,9001),
+('akon1'        ,'I wanna love you','aid6', 'gid6', '1996-09-27',2,9001),
+('akon2'        ,'Beautiful','aid6', 'gid6', '1996-09-27',2,9001),
+('akon3'        ,'Dangerous','aid6', 'gid6', '1996-09-27',2,9001),
+('akon4'        ,'Freedom','aid6', 'gid6', '1996-09-27',2,9001),
+('akon5'        ,'Blame it on me','aid6', 'gid6', '1996-09-27',2,9001),
+('bryanadams1'  ,'Summer of 69','aid7', 'gid7', '1996-09-27',2,9001),
+('bryanadams2'  ,'Open Road','aid7', 'gid7', '1996-09-27',2,9001), -- this mah jammmm
+('bryanadams3'  ,'Here I am','aid7', 'gid7', '1996-09-27',2,9001),
+('bryanadams4'  ,'Please forgive me','aid7', 'gid7', '1996-09-27',2,9001),
+('bryanadams5'  ,'All for Love','aid7', 'gid7', '1996-09-27',2,9001),
+('bustinjieber1','Despacito','aid8', 'gid8', '1996-09-27',2,9001), --yuk!
+('bustinjieber2','Baby','aid8', 'gid8', '1996-09-27',2,9001), --yuk!
+('bustinjieber3','Friends','aid8', 'gid8', '1996-09-27',2,9001), --yuk!
+('bustinjieber4','Love yourself','aid8', 'gid8', '1996-09-27',2,9001), --yuk!
+('bustinjieber5','Sorry','aid8', 'gid8', '1996-09-27',2,9001), --yuk!
+('daftpunk1'    ,'Get Lucky','aid9', 'gid9', '1996-09-27',2,9001),
+('daftpunk2'    ,'I feel it coming','aid9', 'gid9', '1996-09-27',2,9001),
+('daftpunk3'    ,'Giogio by Moroder','aid9', 'gid9', '1996-09-27',2,9001),
+('daftpunk4'    ,'Fragments of Time','aid9', 'gid9', '1996-09-27',2,9001),
+('daftpunk5'    ,'Veridis Quo','aid9', 'gid9', '1996-09-27',2,9001), --Fun fact: if you say veridis quo over and and over it sounds like very disco, which at faster speed sounds like disco-very which is the name of the Daft Punk album
+('hills1'       ,'One way Jesus','aid10', 'gid10', '1996-09-27',20,9001), --this is the only song I know actually lol
+('hills2'       ,'Ocean','aid10', 'gid10', '1996-09-27',20,9001),
+('hills3'       ,'Even when it hurts','aid10', 'gid10', '1996-09-27',20,9001),
+('hills4'       ,'Touch the sky','aid10', 'gid10', '1996-09-27',20,9001),
+('hills5'       ,'Hosanna','aid10', 'gid10', '1996-09-27',20,9001);
+
 
 
 --CREATE TABLE Purchase (uid CHAR(10),
@@ -210,7 +211,108 @@ VALUES
 --	                    FOREIGN KEY (uid) REFERENCES Users (uid),
 --	                    FOREIGN KEY (sid) REFERENCES Songs (sid));
 
-
+INSERT INTO Purchase
+VALUES
+('1543016742','metallica1'   )
+('5507545360','metallica2'   )
+('5367111875','metallica3'   )
+('4157012727','metallica4'   )
+('4503882590','metallica5'   )
+('9424857467','beatles1'     )
+('9007822391','beatles2'     )
+('8916979800','beatles3'     )
+('8339700975','beatles4'     )
+('9507916324','beatles5'     )
+('1863724411','beegees1'     )
+('0961021594','beegees2'     )
+('6780977303','beegees3'     )
+('6408807324','beegees4'     )
+('6598120290','beegees5'     )
+('2049257728','rhcp1'        )
+('9179721060','rhcp2'        )
+('2515419073','rhcp3'        )
+('0928753099','rhcp4'        )
+('2369177638','rhcp5'        )
+('1041372087','mozart1'      )
+('0751548259','mozart2'      )
+('1105048485','mozart3'      )
+('0233865394','mozart4'      )
+('5924712348','mozart5'      )
+('5265665108','akon1'        )
+('9126763588','akon2'        )
+('9812563523','akon3'        )
+('3161688133','akon4'        )
+('0577784759','akon5'        )
+('6783759751','bryanadams1'  )
+('8632765976','bryanadams2'  )
+('1592745778','bryanadams3'  )
+('5156836740','bryanadams4'  )
+('4520451747','bryanadams5'  )
+('0785579744','bustinjieber1')
+('2834354014','bustinjieber2')
+('8064023363','bustinjieber3')
+('3220417008','bustinjieber4')
+('7041189155','bustinjieber5')
+('9423447526','daftpunk1'    )
+('9822646487','daftpunk2'    )
+('1748078306','daftpunk3'    )
+('9170428560','daftpunk4'    )
+('1489474008','daftpunk5'    )
+('9140780204','hills1'       )
+('8781560637','hills2'       )
+('5545645677','hills3'       )
+('7874690823','hills4'       )
+('1334435407','hills5'       )
+('5154398333','metallica1'   )
+('3329857023','metallica2'   )
+('7338181413','metallica3'   )
+('2628627057','metallica4'   )
+('1470665573','metallica5'   )
+('7893884058','beatles1'     )
+('5820227525','beatles2'     )
+('0593403813','beatles3'     )
+('1639394380','beatles4'     )
+('0995233506','beatles5'     )
+('0620313556','beegees1'     )
+('5031528600','beegees2'     )
+('9808078545','beegees3'     )
+('5520174072','beegees4'     )
+('8485627393','beegees5'     )
+('1352987289','rhcp1'        )
+('2472048124','rhcp2'        )
+('7779851861','rhcp3'        )
+('2168164519','rhcp4'        )
+('5568240570','rhcp5'        )
+('6180679732','mozart1'      )
+('8153643055','mozart2'      )
+('3116923243','mozart3'      )
+('2526222910','mozart4'      )
+('4795405179','mozart5'      )
+('4641329504','akon1'        )
+('7678782837','akon2'        )
+('5081237274','akon3'        )
+('0208728194','akon4'        )
+('5951456362','akon5'        )
+('4518708309','bryanadams1'  )
+('4854683135','bryanadams2'  )
+('7155431551','bryanadams3'  )
+('9407564763','bryanadams4'  )
+('6423042893','bryanadams5'  )
+('5184570051','bustinjieber1')
+('7470009749','bustinjieber2')
+('6431817656','bustinjieber3')
+('1146015069','bustinjieber4')
+('3737552163','bustinjieber5')
+('8169884109','daftpunk1'    )
+('7232048915','daftpunk2'    )
+('4549439120','daftpunk3'    )
+('6763852513','daftpunk4'    )
+('4120469947','daftpunk5'    )
+('1501893574','hills1'       )
+('8488301634','hills2'       )
+('9228116870','hills3'       )
+('4167462128','hills4'       )
+('4904556412','hills5'       );
 
 --CREATE TABLE Feedbacks (uid CHAR(10) NOT NULL,
 --						sid CHAR(10) NOT NULL,
