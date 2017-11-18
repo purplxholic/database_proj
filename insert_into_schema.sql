@@ -150,13 +150,68 @@ VALUES
 --					CHECK (numDownloads <= numLicense),
 --					FOREIGN KEY (aid) REFERENCES Artists (aid),
 --					FOREIGN KEY (gid) REFERENCES Genres (gid));
---
+INSERT INTO Songs (sid, name, aid, gid, releaseDate, numDownloads, numLicense)
+VALUES
+('metallica1','For whom the Bell tolls','aid1', 'gid1', '1996-09-27',3,9001),
+('metallica2','Ride the Lightning','aid1', 'gid1', '1996-09-27',3,9001),
+('metallica3','Unforgiven','aid1', 'gid1', '1996-09-27',3,9001),
+('metallica4','Fade to Black','aid1', 'gid1', '1996-09-27',3,9001), --Aish's favorite
+('metallica5','Nothing Else Matters','aid1', 'gid1', '1996-09-27',3,9001),
+('beatles1','Here comes the sun','aid2', 'gid2', '1996-09-27',3,9001),
+('beatles2','I wanna hold your hand','aid2', 'gid2', '1996-09-27',3,9001),
+('beatles3','Hey Jude','aid2', 'gid2', '1996-09-27',3,9001),
+('beatles4','Help!','aid2', 'gid2', '1996-09-27',3,9001),
+('beatles5','Seargeant Peppers Lonely Hearts Club Band','aid2', 'gid2', '1996-09-27',3,9001),
+('beegees1','Staying Alive','aid3', 'gid3', '1996-09-27',2,9001),
+('beegees2','How deep is your love','aid3', 'gid3', '1996-09-27',2,9001),
+('beegees3','Night Fever','aid3', 'gid3', '1996-09-27',2,9001),
+('beegees4','I started a joke','aid3', 'gid3', '1996-09-27',2,9001),
+('beegees5','Too much heaven','aid3', 'gid3', '1996-09-27',2,9001),
+('rhcp1','Rain dance maggie','aid4', 'gid4', '1996-09-27',4,9001), --aww yeaaahhh \m/ this is the best!
+('rhcp2','Scar Tissue','aid4', 'gid4', '1996-09-27',4,9001),
+('rhcp3','Californication','aid4', 'gid4', '1996-09-27',4,9001),
+('rhcp4','Under the Bridge','aid4', 'gid4', '1996-09-27',4,9001),
+('rhcp15','Snow','aid4', 'gid4', '1996-09-27',4,9001),
+('mozart1','The Magic Flue','aid5', 'gid5', '1996-09-27',5,9001),
+('mozart2','Don Giovanni','aid5', 'gid5', '1996-09-27',5,9001),
+('mozart3','Requiem','aid5', 'gid5', '1996-09-27',5,9001),
+('mozart4','The Marriage of Figaro','aid5', 'gid5', '1996-09-27',5,9001),
+('mozart5','Clarinet Concerto','aid5', 'gid5', '1996-09-27',5,9001),
+('akon1','I wanna love you','aid6', 'gid6', '1996-09-27',6,9001),
+('akon2','Beautiful','aid6', 'gid6', '1996-09-27',6,9001),
+('akon3','Dangerous','aid6', 'gid6', '1996-09-27',6,9001),
+('akon4','Freedom','aid6', 'gid6', '1996-09-27',6,9001),
+('akon5','Blame it on me','aid6', 'gid6', '1996-09-27',6,9001),
+('bryanadams1','Summer of 69','aid7', 'gid7', '1996-09-27',7,9001),
+('bryanadams2','Open Road','aid7', 'gid7', '1996-09-27',7,9001), -- this mah jammmm
+('bryanadams3','Here I am','aid7', 'gid7', '1996-09-27',7,9001),
+('bryanadams4','Please forgive me','aid7', 'gid7', '1996-09-27',7,9001),
+('bryanadams5','All for Love','aid7', 'gid7', '1996-09-27',7,9001),
+('bustinjieber1','Despacito','aid8', 'gid8', '1996-09-27',8,9001), --yuk!
+('bustinjieber2','Baby','aid8', 'gid8', '1996-09-27',8,9001), --yuk!
+('bustinjieber3','Friends','aid8', 'gid8', '1996-09-27',8,9001), --yuk!
+('bustinjieber4','Love yourself','aid8', 'gid8', '1996-09-27',8,9001), --yuk!
+('bustinjieber5','Sorry','aid8', 'gid8', '1996-09-27',8,9001), --yuk!
+('daftpunk1','Get Lucky','aid9', 'gid9', '1996-09-27',9,9001),
+('daftpunk2','I feel it coming','aid9', 'gid9', '1996-09-27',9,9001),
+('daftpunk3','Giogio by Moroder','aid9', 'gid9', '1996-09-27',9,9001),
+('daftpunk4','Fragments of Time','aid9', 'gid9', '1996-09-27',9,9001),
+('daftpunk5','Veridis Quo','aid9', 'gid9', '1996-09-27',9,9001), --Fun fact: if you say veridis quo over and and over it sounds like very disco, which at faster speed sounds like disco-very which is the name of the Daft Punk album
+('hillsongunited1','One way Jesus','aid10', 'gid10', '1996-09-27',10,9001), --this is the only song I know actually lol
+('hillsongunited2','Ocean','aid10', 'gid10', '1996-09-27',10,9001),
+('hillsongunited3','Even when it hurts','aid10', 'gid10', '1996-09-27',10,9001),
+('hillsongunited4','Touch the sky','aid10', 'gid10', '1996-09-27',10,9001),
+('hillsongunited5','Hosanna','aid10', 'gid10', '1996-09-27',10,9001),
+
+
 --CREATE TABLE Purchase (uid CHAR(10),
 --						sid CHAR(10),
 --	                    PRIMARY KEY (uid, sid),
 --	                    FOREIGN KEY (uid) REFERENCES Users (uid),
 --	                    FOREIGN KEY (sid) REFERENCES Songs (sid));
---
+
+
+
 --CREATE TABLE Feedbacks (uid CHAR(10) NOT NULL,
 --						sid CHAR(10) NOT NULL,
 --                        score INTEGER NOT NULL CHECK (score>=0 AND score<=10),
