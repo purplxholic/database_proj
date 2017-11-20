@@ -21,5 +21,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^music/', include('feedback_rating.urls')),
     url(r'^statistics/', include('statistics.urls')),
-    url(r'^inventory/', include('inventory_system.urls')) #shortened url for user ease
+    url(r'^inventory/', include('inventory_system.urls')), #shortened url for user ease
+    url(r'^browse/', include('browser.urls'))
 ]
