@@ -22,19 +22,25 @@
     <![endif]-->
 
     <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/stars.css' %}">
     <link rel="stylesheet" href="{% static 'css/feedbacks.css' %}">
   </head>
   <body>
     <h1>{{ music.name }}</h1>
-    {% for feedback in feedbacks %}
-    	<h3>{{ feedback.login }} | {{ feedback.postDate }}</h5>
-    	<h5>Score: {{ feedback.score }}</h5>
-    	{% if feedback.comments %}
-    		<p>{{ feedback.comments }}</p>
-    	{% endif %}
-    	<h5>Feedback Rating: {{ feedback.rating }}</h5>
 
-    {% endfor %}
+    <div class='feedbacks'>
+        <h2>Customer Reviews</h2>
+        {% for feedback in feedbacks %}
+            <div class='feedback'>
+            	<p id='feedback_username'>{{ feedback.login }}</p>
+                <p><span class='stars-container stars-{{ feedback.score }}'>★★★★★★★★★★</span> <span id='feedback_date'>{{ feedback.postDate }}</span></p>    	
+            	{% if feedback.comments %}
+            		<p>{{ feedback.comments }}</p>
+            	{% endif %}
+            	<p>Feedback Rating: {{ feedback.rating }}</p>
+            </div>
+        {% endfor %}
+    </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
