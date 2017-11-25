@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<head>
+  <title>Get some statistics</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+</head>
+
+<body>
+  <div class ="top-buffer">
+  </div>
+  <div class="container">
+    <p> Here, you can find out the top songs, artists and genre!</p>
+  </div>
+  <div class= "container">
+    <div class="page-header padding-left">
+      <h2>Instructions</h2>
+    </div>
+    <p> Choose which of the following you wish to see:</p>
+    <p class="text-center"> songs , artist , genre , all</p>
+
+    <p>change your url to: /statistics/stats_choice/<b>(your choice here)</b>/<b>top_no</b></p>
+    <!-- <p> {{ Status }} </p> -->
+  </div>
+</body>
