@@ -6,7 +6,9 @@ from django.http import HttpResponse
 from django.db import connection
 
 def index(request):
-    return HttpResponse("Statistics function is working!")
+    context = {"Status":"Statistics function is working!"}
+    return render(request,'statistics/index.html',context)
+    # return HttpResponse("Statistics function is working!")
 
 '''
 stats_choice reads the choice of statistics that user wants to be returned
@@ -14,16 +16,39 @@ depending on choice, load the different methods to query
 returned value of the functions below would be in INT
 '''
 def stats_choice(request,choice,top_no):
-    if choice == "song":
-        return HttpResponse(song_stats(top_no))
-    elif choice == "artist":
-        return HttpResponse(artist_stats(top_no))
-    elif choice == "genre":
-        return HttpResponse(genre_stats(top_no))
-    elif choice == "all":
-        return song_stats(top_no),artist_stats(top_no),genre_stats(top_no),labels_stats(top_no)
+    results = []
+
+    correct_req = True
+    exceeded = False
+    query_length = 0
+    if choice == "all":
+        exceeded_s = False
+        exceeded_a = False
+        exceeded_g = False
+        results_s=[]
+        results_a=[]
+        results_g=[]
+        results_s, exceeded_s, query_length_s = song_stats(top_no)
+        results_a, exceeded_a, query_length_a = artist_stats(top_no)
+        results_g, exceeded_g, query_length_g = genre_stats(top_no)
+        context = {"results_s" : results_s,"results_a" : results_a,"results_g" : results_g,"correct_req":correct_req,"type":choice,"no":top_no,"exceeded_s":exceeded_s,"exceeded_a":exceeded_a,"exceeded_g":exceeded_g,"query_length_s":query_length_s,"query_length_a":query_length_a,"query_length_g":query_length_g}
+
     else:
-        return HttpResponse("Invalid Choice. Options: song,artist,genre,label and all. Your choice:" + choice)
+
+        if choice == "song":
+
+            results, exceeded, query_length = song_stats(top_no)
+        elif choice == "artist":
+
+            results, exceeded, query_length = artist_stats(top_no)
+        elif choice == "genre":
+
+            results, exceeded, query_length = genre_stats(top_no)
+        else:
+            correct_req = False
+            results = "Invalid Choice. Your choice was " + choice + ". Available options: song,artist,genre and all. "
+        context = {"results" : results,"correct_req":correct_req,"type":choice,"no":top_no,"exceeded":exceeded,"query_length":query_length}
+    return render(request,'statistics/top.html',context)
 #displays user stated number of top songs
 def song_stats(top_no):
     song_names = []
@@ -42,14 +67,11 @@ def song_stats(top_no):
         #results returned should be in ((xxx),(yyy))
         for i in range(query_length):
             name = results[i][0]
-            song_names.append(name + " ")
+            song_names.append(name )
 
-    if exceeded :
-        song_names.append("\nSorry! We could only return the top " + str(query_length))
-    return song_names
+    return song_names,exceeded, str(query_length)
 
 #displays user stated number of top artists
-#TODO: count no. of time artist appeared in the Purchases
 def artist_stats(top_no):
     artist_names = []
     query_length = int(top_no)
@@ -65,10 +87,9 @@ def artist_stats(top_no):
 
         for i in range(query_length):
             name = results[i][0]
-            artist_names.append(name + " ")
-    if exceeded :
-        artist_names.append("\nSorry! We could only return the top " + str(query_length))
-    return artist_names
+            artist_names.append(name)
+
+    return artist_names,exceeded, str(query_length)
 
 #displays user stated number of top genre
 def genre_stats(top_no):
@@ -76,17 +97,16 @@ def genre_stats(top_no):
     query_length = int(top_no)
     exceeded = False
     with connection.cursor() as cursor:
-        cursor.execute("SELECT G.name FROM Purchases P, Songs S, Genres G WHERE P.sid = S.sid AND G.gid = S.gid GROUP BY G.aid ORDER BY COUNT(*) DESC")
+        cursor.execute("SELECT G.name FROM Purchases P, Songs S, Genres G WHERE P.sid = S.sid AND G.gid = S.gid GROUP BY G.gid ORDER BY COUNT(*) DESC")
         results = cursor.fetchall() # get all the results
 
         #to handle if requested no. of top exceeds queried number
         if (len(results) < query_length):
-            query_length = len(results + " ")
+            query_length = len(results)
             exceeded = True
 
-        for i in range(top_no):
+        for i in range(query_length):
             name = results[i][0]
             genre_names.append(name)
-    if exceeded :
-        genre_names.append("\nSorry! We could only return the top " + str(query_length))
-    return genre_names
+
+    return genre_names,exceeded, str(query_length)
