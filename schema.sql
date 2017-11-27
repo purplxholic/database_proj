@@ -39,6 +39,5 @@ CREATE TABLE Ratings (uid CHAR(20),
 					sid CHAR(20),
 					score INTEGER CHECK (score>=0 AND score<=2),
 					PRIMARY KEY(uid, fuid, sid),
-					FOREIGN KEY (fuid, sid) REFERENCES Feedbacks (uid,sid),
-                    CHECK (uid <> fuid));
+					FOREIGN KEY (fuid, sid) REFERENCES Feedbacks (uid,sid));
 
