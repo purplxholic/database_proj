@@ -55,12 +55,12 @@ def music_info(request, pk):
 		for feedback in feedbacks: # iterate through feedbacks for a particular song to get ratings
 			fuid = feedback['uid'] # the person who made the feedback
 			cursor.execute("SELECT AVG(score) FROM Ratings GROUP BY fuid,sid HAVING fuid = %s AND sid = %s", [fuid, pk])
-      		r = cursor.fetchone()
+			r = cursor.fetchone()
 			if r:
 				feedback['rating'] = '{:.1f}'.format(r[0])
 			else:
 				feedback['rating'] = 0.0
-
+				
 		if numFeedbacks>0:
 			feedbacks = sorted(feedbacks, key=lambda k:k[sorting], reverse=True)[:numFeedbacks]
 			# feedbacks = feedbacks[:numFeedbacks]
