@@ -30,6 +30,11 @@
 
     <div class='feedbacks'>
         <h2>Customer Reviews</h2>
+        <form method='POST'>{% csrf_token %}
+            {{ sort_form.as_p }}
+            <button type='submit' name='sort-feedback-btn'>Filter</button>        
+        </form>
+
         {% for feedback in feedbacks %}
             <div class='feedback'>
             	<p id='feedback_username'>{{ feedback.login }}</p>
@@ -38,9 +43,17 @@
             		<p>{{ feedback.comments }}</p>
             	{% endif %}
             	<p>Feedback Rating: {{ feedback.rating }}</p>
+                <form method='POST'>{% csrf_token %}
+                    <button type='submit' name='useless-btn' value={{ feedback.uid }}>Useless</button><button type='submit' name='useful-btn' value={{ feedback.uid }}>Useful</button><button type='submit' name='very-useful-btn' value={{ feedback.uid }}>Very Useful</button>
+                </form>
             </div>
         {% endfor %}
     </div>
+
+    <form method='POST'>{% csrf_token %}
+        {{ feedback_form.as_p }}
+        <button type='submit' name='submit-feedback-btn'>Submit</button>
+    </form>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
