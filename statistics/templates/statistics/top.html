@@ -1,0 +1,127 @@
+<!DOCTYPE HTML>
+<head>
+  <title>Top {{ no }} {{ type }}</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/top.css' %}">
+<head>
+
+<body>
+  <div class="container">
+    {% if correct_req %}
+    <div class ="alert alert-success">
+
+      <p> We found something! </p>
+
+    </div>
+    {% if type == "all" %}
+    <div class ="row">
+      <div class="col-sm-4">
+      <div class="page-header padding-left">
+        <h3>Songs</h3>
+      </div>
+      <table class="table">
+        <tr>
+          <th> No. </th>
+          <th> Name </th>
+        </tr>
+        {% for r in results_s %}
+
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ r }}</td>
+        </tr>
+        {% endfor %}
+
+      </table>
+      <br>
+      {% if exceeded_s %}
+        <div class="alert alert-danger">class="table"
+          <p> Oops! You requested for too many returns. We could only return the top {{ query_length_s }}.</p>
+        </div>
+      {% endif %}
+    </div>
+    <div class="col-sm-4">
+    <div class="page-header padding-left">
+      <h3>Artists</h3>
+    </div>
+    <table class="table">
+      <tr>
+        <th> No. </th>
+        <th> Name </th>
+      </tr>
+      {% for r in results_a %}
+
+      <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ r }}</td>
+      </tr>
+      {% endfor %}
+
+    </table>
+    <br>
+    {% if exceeded_a %}
+      <div class="alert alert-danger">
+        <p> Oops! You requested for too many returns. We could only return the top {{ query_length_a }}.</p>
+      </div>
+    {% endif %}
+  </div>
+  <div class="col-sm-4">
+  <div class="page-header padding-left">
+    <h3>Genres</h3>
+  </div>
+  <table class="table">
+    <tr>
+      <th> No. </th>
+      <th> Name </th>
+    </tr>
+    {% for r in results_g %}
+
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ r }}</td>
+    </tr>
+    {% endfor %}
+
+  </table>
+  <br>
+  {% if exceeded_g %}
+    <div class="alert alert-danger">
+      <p> Oops! You requested for too many returns. We could only return the top {{ query_length_g }}.</p>
+    </div>
+  {% endif %}
+</div>
+</div>
+
+    {% else %}
+    <div class="page-header padding-left">
+      <h3>{{ type }}</h3>
+    </div>
+    <table class="table">
+      <tr>
+        <th> No. </th>
+        <th> Name </th>
+      </tr>
+      {% for r in results %}
+
+      <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ r }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% if exceeded %}
+      <div class="alert alert-danger">
+        <p> Oops! You requested for too many returns. We could only return the top {{ query_length }}.</p>
+      </div>
+    {% endif %}
+    {% endif %}
+
+    {% else %}
+    <div class ="alert alert-danger">
+      <p> Oops! {{  results }} </p>
+    </div>
+    {% endif %}
+
+</div>
+</body>
