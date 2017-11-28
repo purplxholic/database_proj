@@ -7,9 +7,9 @@ from django.contrib import admin
 
 from .models import *
 
-admin.site.register(Artist)
-admin.site.register(Genre)
-admin.site.register(Song)
-admin.site.register(Purchase)
-admin.site.register(Feedback)
-admin.site.register(Rating)
+# admin.site.register(Artist)
+# admin.site.register(Genre)
+# admin.site.register(Song)
+# admin.site.register(Purchase)
+# admin.site.register(Feedback)
+# admin.site.register(Rating)

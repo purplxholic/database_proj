@@ -4,11 +4,9 @@ from django.shortcuts import render
 from django.views.generic.list import ListView
 from django.views.generic.edit import FormView
 
-from inventory_system.models import Song
-
 from .forms import BrowseForm
 
-from feedback_rating.utils import dictfetchall
+from music_store.utils import dictfetchall
 
 class BrowseView(FormView):
     template_name = "index.html"
@@ -29,7 +27,6 @@ class BrowseView(FormView):
         return super(BrowseView, self).form_valid(form)
 
 class BrowseResultsView(ListView):
-    model = Song
     template_name = "browse_results.html"
 
     def get_context_data(self, **kwargs):
@@ -37,26 +34,34 @@ class BrowseResultsView(ListView):
         return context
 
     def get_queryset(self):
-        query = "SELECT * from inventory_system_song"
-        conditions = ""
+        query = "SELECT Songs.name as song_name, Artists.name as artist_name, Genres.name as genre_name, Songs.releaseDate from Songs INNER JOIN Artists INNER JOIN Genres"
+        conditions = " WHERE Songs.aid = Artists.aid AND Songs.gid = Genres.gid"
         name = self.request.GET.get('Name') 
         if (name is not ""):
-            conditions += " WHERE name LIKE '%%" + name + "%%'"
+            conditions += " AND Songs.name LIKE '%%" + name + "%%'"
 
         artist = self.request.GET.get('Artist')
         if (artist is not ""):
-            query += ", inventory_system_artist"
             if (conditions is not ""):
-                conditions += " AND inventory_system_artist.name LIKE '%%" + artist + "%%'"
-            else:
-                conditions += " WHERE inventory_system_artist.name LIKE '%%" + artist + "%%'"
+                conditions += " AND Artists.name LIKE '%%" + artist + "%%'"
                 
         genre = self.request.GET.get('Genre')
         if (genre is not ""):
-            query += ", inventory_system_genre"
             if (conditions is not ""):
-                conditions += " AND inventory_system_genre.name LIKE '%%" + genre + "%%'"
-            else:
-                conditions += " WHERE inventory_system_genre.name LIKE '%%" + genre + "%%'"
+                conditions += " AND Genres.name LIKE '%%" + genre + "%%'"
 
-        return Song.objects.raw(query + conditions)
+        with connection.cursor() as cursor:
+            cursor.execute(query + conditions)
+            songs = dictfetchall(cursor, fetchall = True)
+            
+        #     for feedback in feedbacks: # iterate through feedbacks for a particular song to get ratings
+        #         fuid = feedback['uid'] # the person who made the feedback
+        #         cursor.execute("SELECT AVG(score) FROM Ratings GROUP BY fuid,sid HAVING fuid = %s AND sid = %s", [fuid, pk])
+        #         r = cursor.fetchone()
+        #         if r:
+        #             feedback['rating'] = '{:.1f}'.format(r[0])
+        #         else:
+        #             feedback['rating'] = 0.0
+        
+        return songs
+
