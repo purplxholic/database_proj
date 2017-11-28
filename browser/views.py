@@ -8,7 +8,7 @@ from inventory_system.models import Song
 
 from .forms import BrowseForm
 
-from music_store.utils import dictfetchall
+from feedback_rating.utils import dictfetchall
 
 class BrowseView(FormView):
     template_name = "index.html"
