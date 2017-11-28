@@ -30,3 +30,4 @@ python manage.py runserver
 # Paths
 
 browse/ - Browser
+music/<music sid> - Info of the music, with the feedback and ratings for the music 
