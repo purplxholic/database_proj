@@ -8,11 +8,11 @@
 <h1>Songs</h1>
 <ul>
 {% for song in object_list %}
-    <li>{{ song.name }}</li>
+    <li>{{ song.song_name }}</li>
     <ul>
-        <li>Artist: {{ song.artist }}</li>
-        <li>Genre: {{ song.genre }}</li>
-        <li>Release Date: {{ song.release_date|date }}</li>
+        <li>Artist: {{ song.artist_name }}</li>
+        <li>Genre: {{ song.genre_name }}</li>
+        <li>Release Date: {{ song.releaseDate }}</li>
     </ul>
 {% empty %}
     <li>No songs yet.</li>

@@ -5,7 +5,7 @@ from django.shortcuts import render
 
 from django.db import connection
 
-from feedback_rating.utils import dictfetchall
+from music_store.utils import dictfetchall
 from feedback_rating.models import FeedbackForm, SortForm
 
 import datetime
