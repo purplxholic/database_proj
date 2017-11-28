@@ -27,7 +27,6 @@ def music_info(request, pk):
 
 	with connection.cursor() as cursor:
 		if request.method == 'POST':
-			print request.POST
 			if 'useless-btn' in request.POST:
 				cursor.execute("INSERT INTO Ratings (uid, fuid, sid, score) VALUES (%s, %s, %s, %s)", [uid, request.POST['useless-btn'], pk, '0'])
 			elif 'useful-btn' in request.POST:
