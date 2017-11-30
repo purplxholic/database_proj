@@ -3,10 +3,12 @@ from __future__ import unicode_literals
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.db import connection
+from django.views.generic import ListView
 
+from music_store.utils import dictfetchall
 
 # Create your views here.
-def recommend(request):
+def recommend():
 
     # return HttpResponse("Recommender motherfuckkkaazzz")
     with connection.cursor() as cursor:
@@ -25,23 +27,29 @@ def recommend(request):
 
         cursor.execute(
 
-       "SELECT s.sid, s.name, s.aid, s.gid, s.releaseDate, s.numDownloads, s.numLicense " 
-       "FROM songs as s, (SELECT DISTINCT sid  FROM Purchases, (SELECT uid FROM Purchases " 
+       "SELECT g.name as genre, a.name artist, s.sid, s.name, s.aid, s.gid, s.releaseDate, s.numDownloads, s.numLicense " 
+       "FROM artists as a, genres as g, songs as s, (SELECT DISTINCT sid  FROM Purchases, (SELECT uid FROM Purchases " 
 													            "WHERE Purchases.sid = '0000000001' AND Purchases.uid <> '1543016742') AS similar_users " 
 			             "WHERE Purchases.uid = similar_users.uid AND Purchases.sid <> '0000000001') AS recommendations "
-       "WHERE s.sid = recommendations.sid " 
+       "WHERE s.sid = recommendations.sid AND s.aid=a.aid AND s.gid=g.gid " 
        "ORDER by s.numDownloads DESC"
         )
-        row = dictfetchall(cursor)
+        songs = dictfetchall(cursor,fetchall=True)
 
 
+    return songs
+    # return render(request, 'recommender.html', songs)
 
-    return render(request, 'Recommender/recommender.html', {'recommendations':row})
 
-def dictfetchall(cursor):
-    "Return all rows from a cursor as a dict"
-    columns = [col[0] for col in cursor.description]
-    return [
-        dict(zip(columns, row))
-        for row in cursor.fetchall()
-    ]
+class BrowseResultsView(ListView):
+    template_name = "recommender.html"
+
+    #
+    #
+    # def get_context_data(self, **kwargs):
+    #     context = super(BrowseResultsView, self).get_context_data(**kwargs)
+    #     return context
+
+    def get_queryset(self):
+        songs = recommend()
+        return songs
