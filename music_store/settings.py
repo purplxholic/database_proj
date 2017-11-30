@@ -40,8 +40,10 @@ INSTALLED_APPS = [
     'feedback_rating',
     'statistics',
     'inventory_system',
-    'browser.apps.BrowserConfig',
-    'inventory_system.apps.InventorySystemConfig'
+    'music_store'
+    # 'inventory_system',
+    # 'browser.apps.BrowserConfig',
+    # 'inventory_system.apps.InventorySystemConfig'
 ]
 
 MIDDLEWARE = [
