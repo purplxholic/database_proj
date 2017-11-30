@@ -5,7 +5,7 @@ from django.shortcuts import render
 
 from django.db import connection
 
-from feedback_rating.utils import dictfetchall
+from music_store.utils import dictfetchall
 from feedback_rating.models import FeedbackForm, SortForm
 
 import datetime
@@ -27,7 +27,6 @@ def music_info(request, pk):
 
 	with connection.cursor() as cursor:
 		if request.method == 'POST':
-			print request.POST
 			if 'useless-btn' in request.POST:
 				cursor.execute("INSERT INTO Ratings (uid, fuid, sid, score) VALUES (%s, %s, %s, %s)", [uid, request.POST['useless-btn'], pk, '0'])
 			elif 'useful-btn' in request.POST:

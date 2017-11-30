@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'feedback_rating',
     'statistics',
-    'inventory_system'
+    'inventory_system',
+    'browser.apps.BrowserConfig',
+    'inventory_system.apps.InventorySystemConfig'
 ]
 
 MIDDLEWARE = [
