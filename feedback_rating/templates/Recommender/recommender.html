@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>Field 1</th>
+        ...
+        <th>Field N</th>
+    </tr>
+    {% for item in recommendations %}
+    <tr>
+        <td>{{ item.field1 }}</td>
+        ...
+        <td>{{ item.fieldN }}</td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

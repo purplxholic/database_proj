@@ -22,5 +22,7 @@ urlpatterns = [
     url(r'^music/', include('feedback_rating.urls')),
     url(r'^statistics/', include('statistics.urls')),
     url(r'^inventory/', include('inventory_system.urls')), #shortened url for user ease
-    url(r'^browse/', include('browser.urls'))
+    url(r'^browse/', include('browser.urls')),
+    url(r'^Recommender/', include('Recommender.urls'))
+
 ]

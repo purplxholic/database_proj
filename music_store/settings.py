@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'feedback_rating',
     'browser.apps.BrowserConfig',
-    'inventory_system.apps.InventorySystemConfig'
+    'inventory_system.apps.InventorySystemConfig',
+    'Recommender'
 ]
 
 MIDDLEWARE = [
@@ -88,7 +89,7 @@ DATABASES = {
         'USER': 'guest',
         'PASSWORD': 'password',
         'HOST': 'localhost',
-        'PORT': '',
+        'PORT': '3306',
     }
 }
 
