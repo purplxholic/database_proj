@@ -40,9 +40,10 @@ INSTALLED_APPS = [
     'feedback_rating',
     'statistics',
     'inventory_system',
-    'music_store'
+    'music_store',
     # 'inventory_system',
     # 'browser.apps.BrowserConfig',
+    'widget_tweaks'
     # 'inventory_system.apps.InventorySystemConfig'
 ]
 
