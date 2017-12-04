@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<head>
+  <title> Inventory </title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="col-sm-6">
+      <div class="page-header padding-left">
+        <h1>Note</h1>
+      </div>
+
+      <p>Date is in YYYY-mm-dd format.</p>
+    </div>
+    <div class="col-sm-6">
+      <form role="form" action="" method = "post"}>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+      </form>
+      {% if status %}
+      <div class="alert alert-success">
+        {{ message }}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</body>
