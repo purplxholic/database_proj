@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+{% load widget_tweaks %}
+<head>
+  <title>Get some statistics</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+</head>
+
+<body>
+  <div class ="top-buffer">
+  </div>
+  <div class="container">
+    <p> Here, you can find out the top songs, artists and genre!</p>
+  </div>
+
+  <div class="container">
+    <p>Choose which of the following you wish to see</p>
+
+      <form role="form" action="" method = "post">
+        {% csrf_token %}
+        {% for hidden_field in form.hidden_fields %}
+
+          {{ hidden_field }}
+        {% endfor %}
+
+
+        {% for field in form.visible_fields %}
+
+          <div class="form-group">
+            {{ field.label_tag }}
+            {% render_field field class="form-control" %}
+
+          {% if field.help_text %}
+            <small class="form-text text-muted">{{ field.help_text }}</small>
+          {% endif %}
+          </div>
+
+        {% endfor %}
+        <!-- {{ form.as_p }} -->
+        <button type="submit" class="btn btn-primary">Find!</button>
+      </form>
+      {% if status %}
+      <div class="alert alert-success">
+        {{ message }}
+      </div>
+      {% endif %}
+    </div>
+</body>

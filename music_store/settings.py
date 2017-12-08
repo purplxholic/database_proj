@@ -38,6 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'feedback_rating',
+    'statistics',
+    'inventory_system',
+    'music_store',
+    'browser.apps.BrowserConfig',
+    'widget_tweaks'
+    # 'inventory_system.apps.InventorySystemConfig'
 ]
 
 MIDDLEWARE = [
