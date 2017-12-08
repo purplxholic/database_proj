@@ -41,8 +41,7 @@ INSTALLED_APPS = [
     'statistics',
     'inventory_system',
     'music_store',
-    # 'inventory_system',
-    # 'browser.apps.BrowserConfig',
+    'browser.apps.BrowserConfig',
     'widget_tweaks'
     # 'inventory_system.apps.InventorySystemConfig'
 ]

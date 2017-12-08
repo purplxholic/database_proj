@@ -8,4 +8,5 @@ from django.http import HttpResponse
 from django.db import connection
 
 def index(request):
+
     return render(request,"music_store/index.html")
