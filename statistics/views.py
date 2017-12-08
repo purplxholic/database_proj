@@ -2,13 +2,20 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.db import connection
-
+from .forms import statisticsForm
 def index(request):
-    context = {"Status":"Statistics function is working!"}
-    return render(request,'statistics/index.html',context)
-    # return HttpResponse("Statistics function is working!")
+    form_class = statisticsForm
+
+    if request.method=='POST':
+        form = form_class(data=request.POST)
+        if form.is_valid():
+            topno = request.POST.get('howhigh')
+            type_ofstats = request.POST.get('stats')
+            return HttpResponseRedirect('./stats_choice/'+type_ofstats+"/"+topno)
+    return render(request,'statistics/index.html',{'form':form_class})
+
 
 '''
 stats_choice reads the choice of statistics that user wants to be returned
@@ -47,6 +54,7 @@ def stats_choice(request,choice,top_no):
         else:
             correct_req = False
             results = "Invalid Choice. Your choice was " + choice + ". Available options: song,artist,genre and all. "
+        choice   = choice.title()
         context = {"results" : results,"correct_req":correct_req,"type":choice,"no":top_no,"exceeded":exceeded,"query_length":query_length}
     return render(request,'statistics/top.html',context)
 #displays user stated number of top songs
