@@ -7,12 +7,12 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.db import connection
 from django.urls import reverse
-from .forms import AddMusicForm
+from .forms import AddMusicForm,licenseForm
+
 def index(request):
-    # return HttpResponse("Inventory System is working! Instructions: key in using sid,,name,aid,gid,releaseDate,numDownloads,numLicense. Date in YYYY-mm-dd")
     return render(request,"inventory_system/index.html")
 
-def test(request):
+def inventoryMusic(request):
     form_class = AddMusicForm
 
     #do the stuff
@@ -24,13 +24,26 @@ def test(request):
             aid = request.POST.get('aid','')
             gid = request.POST.get('gid','')
             releaseDate = request.POST.get('releaseDate','')
-            numDownloads = request.POST.get('sid','')
+            numDownloads = request.POST.get('numDownloads','')
+            if numDownloads == "":
+                numDownloads = 0
             numLicense= request.POST.get('numLicense','')
-            status,message = newMusic2(sid,name,aid,gid,releaseDate,numDownloads,numLicense)
+            status,message = newMusic(sid,name,aid,gid,releaseDate,numDownloads,numLicense)
 
-            return render(request,"inventory_system/add_music.html",{'form':form_class,'status':status,'message':message})
+            return render(request,"inventory_system/inventory_form.html",{'form':form_class,'status':status,'message':message,'title':'Add new music'})
 
-    return render(request,"inventory_system/add_music.html",{'form':form_class})
+    return render(request,"inventory_system/inventory_form.html",{'form':form_class,'needed':False,'title':'Add new music'})
+
+def addLicense(request):
+    addLicense_form = licenseForm
+    #do the stuff
+    if request.method == 'POST':
+        form = addLicense_form(data=request.POST)
+        if form.is_valid():
+            sid = request.POST.get('sid','')
+            more_amt = request.POST.get('amt','')
+            return HttpResponseRedirect('./moreLicense/'+sid+"/" +more_amt)
+    return render(request,"inventory_system/inventory_form.html",{'form':addLicense_form,'needed':False,'title':'Add License'})
 
 def newMusic(sid,name,aid,gid,releaseDate,numDownloads,numLicense):
     message = ""
@@ -50,6 +63,7 @@ def newMusic(sid,name,aid,gid,releaseDate,numDownloads,numLicense):
     return good,message
 
 def moreLicense(request,sid,more_amt):
+    form_class = licenseForm
     message= ""
     error_message = ""
     good = True
@@ -65,5 +79,5 @@ def moreLicense(request,sid,more_amt):
         good = False
 
 
-    context={"message":message,"good":good}
-    return render(request,"inventory_system/index.html",context)
+    # context={"message":message,"good":good}
+    return render(request,"inventory_system/inventory_form.html",{'form':form_class,'status':good,'message':message,'title':'Add License'})

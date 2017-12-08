@@ -1,22 +1,17 @@
 <!DOCTYPE HTML>
 {% load widget_tweaks %}
 <head>
-  <title> Inventory </title>
+  <title> {{ title }} </title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 
 <body>
   <div class="container">
-    <div class="col-sm-6">
-      <div class="page-header padding-left">
-        <h1>Note</h1>
-      </div>
 
-      <p>Date is in YYYY-mm-dd format.</p>
-    </div>
     <!-- form part -->
 
-    <div class="col-sm-6">
+
+      <br>
       <form role="form" action="" method = "post">
         {% csrf_token %}
         {% for hidden_field in form.hidden_fields %}
@@ -40,11 +35,18 @@
         <!-- {{ form.as_p }} -->
         <button type="submit" class="btn btn-primary">Submit new music</button>
       </form>
-      {% if status %}
-      <div class="alert alert-success">
-        {{ message }}
-      </div>
+      {% if needed %}
+        {% if status %}
+        <br>
+        <div class="alert alert-success">
+          {{ message }}
+        </div>
+        {% else %}
+        <div class="alert alert-danger">
+          {{ message }}
+        </div>
+        {% endif %}
       {% endif %}
     </div>
-  </div>
-</body>
+
+  </body>
