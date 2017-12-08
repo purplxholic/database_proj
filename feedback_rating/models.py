@@ -17,3 +17,6 @@ class SortForm(forms.Form):
 	count = forms.IntegerField()
 	filter_choices = [('rating', 'Ratings'), ('postDate', 'Post Date')]
 	sort = forms.ChoiceField(choices=filter_choices)
+
+class selectMusicForm(forms.Form):
+    sid = forms.CharField(required=True,max_length=10,min_length=10)

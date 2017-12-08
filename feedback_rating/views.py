@@ -6,11 +6,25 @@ from django.shortcuts import render
 from django.db import connection
 
 from music_store.utils import dictfetchall
-from feedback_rating.models import FeedbackForm, SortForm
-
+from feedback_rating.models import FeedbackForm, SortForm,selectMusicForm
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 import datetime
 
 # Create your views here.
+def index(request):
+	selectMusic_form = selectMusicForm()
+
+	#redirect when you enter the song sid
+	if request.method == "POST":
+		selectMusic_form = selectMusicForm(request.POST)
+		if selectMusic_form.is_valid():
+			cd = selectMusic_form.cleaned_data
+			sid= cd.get('sid')
+			return HttpResponseRedirect('/music/'+sid)
+		
+	return render(request,'feedback_rating/index.html',{'form':selectMusic_form})
+
 def music_info(request, pk):
 	''' gets the primary key of the queried music and displays the info '''
 	feedback_form = FeedbackForm()
@@ -19,8 +33,8 @@ def music_info(request, pk):
 	numFeedbacks = 0
 
 	# hardcoded for now as the user login system has not been implemented
-	# for testing: 
-	# DELETE FROM Feedbacks WHERE uid='0928753099'; 
+	# for testing:
+	# DELETE FROM Feedbacks WHERE uid='0928753099';
 	# DELETE FROM Ratings WHERE uid='0928753099';
 	uid = '0928753099'
 	sorting = ''
@@ -36,7 +50,7 @@ def music_info(request, pk):
 			elif 'sort-feedback-btn' in request.POST:
 				sort_form = SortForm(request.POST)
 				if sort_form.is_valid():
-					cd = sort_form.cleaned_data					
+					cd = sort_form.cleaned_data
 					numFeedbacks = cd.get('count')
 					sorting = cd.get('sort')
 			else:
@@ -59,9 +73,9 @@ def music_info(request, pk):
 				feedback['rating'] = '{:.1f}'.format(r[0])
 			else:
 				feedback['rating'] = 0.0
-				
+
 		if numFeedbacks>0:
 			feedbacks = sorted(feedbacks, key=lambda k:k[sorting], reverse=True)[:numFeedbacks]
 			# feedbacks = feedbacks[:numFeedbacks]
-		
+
 	return render(request, 'feedback_rating/music_info.html', {'music':music, 'feedbacks':feedbacks, 'feedback_form':feedback_form, 'sort_form':sort_form})
