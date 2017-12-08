@@ -1,21 +1,14 @@
 <!DOCTYPE HTML>
 {% load widget_tweaks %}
 <head>
-  <title>Get some statistics</title>
+  <title>Select Music</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  {% load static %}
-  <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
 </head>
 
 <body>
-  <div class ="top-buffer">
-  </div>
+  <br>
   <div class="container">
-    <p> Here, you can find out the top songs, artists and genre!</p>
-  </div>
-
-  <div class="container">
-    <p>Choose which of the following you wish to see</p>
+    <p>Key in the sid of the song you wish to give feedback on!</p>
 
       <form role="form" action="" method = "post">
         {% csrf_token %}
@@ -38,12 +31,7 @@
 
         {% endfor %}
         <!-- {{ form.as_p }} -->
-        <button type="submit" class="btn btn-primary">Find!</button>
+        <button type="submit" class="btn btn-primary">Submit new music</button>
       </form>
-      {% if status %}
-      <div class="alert alert-success">
-        {{ message }}
-      </div>
-      {% endif %}
     </div>
 </body>

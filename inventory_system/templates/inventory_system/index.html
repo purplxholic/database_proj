@@ -6,26 +6,12 @@
 
 <body>
   <div class="container">
-    <div class="page-header padding-left">
-      <h1>Instructions</h1>
+
+    <div class ="jumbotron">
+      <h1>Inventory System</h1>
+      <a class ="btn btn-primary btn-lg" role="button" href ="./newMusic">Add new music</a>
+      <a class ="btn btn-danger btn-lg" role="button" href ="./addLicense">Add more license</a> 
     </div>
-    <p><u>To add a new song:</u></p>
-    <p>add on this url with the appropiate values: newMusic/sid/name/aid/gid/releaseDate/numDownloads/umLicense</p>
-    <p>Date is in YYYY-mm-dd format.</p>
-    <p><b>Note: spaces or any puncuations are accepted for name yet</b></p>
-    <br>
-    <p><u>To increase the number of license:</u></p>
-    <p>add on this url with the appropiate values: moreLicense/sid/amt</p>
-    <br>
-    {% if good %}
-    <div class="alert alert-success">
-      {{ message }}
-    </div>
-    {% else %}
-    <div class="alert alert-danger">
-      Oops! Something went wrong. {{ message }}
-    </div>
-    {% endif %}
   </div>
 
 </body>

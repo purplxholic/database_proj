@@ -38,9 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'feedback_rating',
+    'statistics',
+    'inventory_system',
+    'music_store',
     'browser.apps.BrowserConfig',
-    'inventory_system.apps.InventorySystemConfig',
-    'Recommender'
+    'widget_tweaks'
+    # 'inventory_system.apps.InventorySystemConfig'
 ]
 
 MIDDLEWARE = [
@@ -89,7 +92,7 @@ DATABASES = {
         'USER': 'guest',
         'PASSWORD': 'password',
         'HOST': 'localhost',
-        'PORT': '3306',
+        'PORT': '',
     }
 }
 
