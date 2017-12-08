@@ -10,7 +10,9 @@ from music_store.utils import dictfetchall
 # Create your views here.
 def recommend():
 
-    # return HttpResponse("Recommender motherfuckkkaazzz")
+    sid = '0000000001'
+    uid = '5367111875'
+
     with connection.cursor() as cursor:
         # cursor.execute(
         # "CREATE view recommendations as"+
@@ -26,13 +28,12 @@ def recommend():
         # )
 
         cursor.execute(
-
        "SELECT g.name as genre, a.name artist, s.sid, s.name, s.aid, s.gid, s.releaseDate, s.numDownloads, s.numLicense " 
        "FROM artists as a, genres as g, songs as s, (SELECT DISTINCT sid  FROM Purchases, (SELECT uid FROM Purchases " 
-													            "WHERE Purchases.sid = '0000000001' AND Purchases.uid <> '1543016742') AS similar_users " 
-			             "WHERE Purchases.uid = similar_users.uid AND Purchases.sid <> '0000000001') AS recommendations "
+													 "WHERE Purchases.sid = %s AND Purchases.uid <> %s) AS similar_users " 
+			             "WHERE Purchases.uid = similar_users.uid AND Purchases.sid <> %s) AS recommendations "
        "WHERE s.sid = recommendations.sid AND s.aid=a.aid AND s.gid=g.gid " 
-       "ORDER by s.numDownloads DESC"
+       "ORDER by s.numDownloads DESC",[sid,uid,sid]
         )
         songs = dictfetchall(cursor,fetchall=True)
 
@@ -41,15 +42,16 @@ def recommend():
     # return render(request, 'recommender.html', songs)
 
 
-class BrowseResultsView(ListView):
+class RecommenderView(ListView):
     template_name = "recommender.html"
 
-    #
-    #
-    # def get_context_data(self, **kwargs):
-    #     context = super(BrowseResultsView, self).get_context_data(**kwargs)
-    #     return context
 
     def get_queryset(self):
         songs = recommend()
         return songs
+
+
+
+#trigger
+#don't use sorting using python
+#HTML links to say built in queries you can do
