@@ -1,3 +1,5 @@
+USE music_store;
+
 CREATE TABLE Users (uid CHAR(20) PRIMARY KEY,
 					login VARCHAR(50) UNIQUE NOT NULL,
 					password VARCHAR(20) NOT NULL);
@@ -40,4 +42,21 @@ CREATE TABLE Ratings (uid CHAR(20),
 					score INTEGER CHECK (score>=0 AND score<=2),
 					PRIMARY KEY(uid, fuid, sid),
 					FOREIGN KEY (fuid, sid) REFERENCES Feedbacks (uid,sid));
+
+CREATE TRIGGER update_feedback
+BEFORE UPDATE ON Feedbacks
+FOR EACH ROW
+SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'Updates to Feedbacks table are not allowed!';
+
+DELIMITER //
+CREATE TRIGGER insert_rating
+BEFORE INSERT ON Ratings
+FOR EACH ROW
+BEGIN
+	IF NEW.uid = NEW.fuid THEN
+		SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'Cannot add rating for own comment!';
+	END IF;
+END;//
+DELIMITER ;
+
 
