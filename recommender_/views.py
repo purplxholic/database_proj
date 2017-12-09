@@ -43,15 +43,10 @@ def recommend():
 
 
 class RecommenderView(ListView):
-    template_name = "recommender.html"
+    template_name = "recommender_/recommender.html"
 
 
     def get_queryset(self):
         songs = recommend()
         return songs
 
-
-
-#trigger
-#don't use sorting using python
-#HTML links to say built in queries you can do

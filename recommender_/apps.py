@@ -5,4 +5,4 @@ from django.apps import AppConfig
 
 
 class RecommenderConfig(AppConfig):
-    name = 'Recommender'
+    name = 'recommender_'
