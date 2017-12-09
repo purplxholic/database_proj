@@ -54,7 +54,7 @@ BEFORE INSERT ON Ratings
 FOR EACH ROW
 BEGIN
 	IF NEW.uid = NEW.fuid THEN
-		SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'Cannot add rating for own comment!';
+		SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'Cannot add rating for own feedback!';
 	END IF;
 END;//
 DELIMITER ;
