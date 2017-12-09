@@ -26,7 +26,6 @@ urlpatterns = [
     url(r'^inventory/', include('inventory_system.urls')), #shortened url for user ease
     url(r'^browse/', include('browser.urls')),
     url(r'^Recommender/', include('recommender_.urls')),
-    url(r'^myrecord/', include('user_record.urls'))
-
-
+    url(r'^myrecord/', include('user_record.urls')),
+    url(r'^signup/', include('signup.urls')),
 ]
