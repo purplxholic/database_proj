@@ -11,7 +11,7 @@ class FeedbackForm(forms.Form):
 	score_choices = [(1,1),(2,2),(3,3),(4,4),(5,5),(6,6),(7,7),(8,8),(9,9),(10,10)]
 
 	score = forms.ChoiceField(choices=score_choices)
-	comments = forms.CharField(max_length=250)
+	comments = forms.CharField(max_length=250, required=False)
 
 class SortForm(forms.Form):
 	count = forms.IntegerField()
