@@ -8,6 +8,3 @@ class OrderForm(forms.Form):
     uid = forms.CharField(max_length=10, required=True, help_text='Example:5507545360')
 
     #
-    # class Meta:
-    #
-    #     fields = ('sid', 'uid')
