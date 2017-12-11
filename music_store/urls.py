@@ -28,6 +28,5 @@ urlpatterns = [
     url(r'^browse/', include('browser.urls')),
     url(r'^Recommender/', include('recommender_.urls')),
     url(r'^myrecord/', include('user_record.urls')),
-    url(r'^signup/', include('signup.urls')),
     url(r'^order/', include('order.urls'))
 ]
