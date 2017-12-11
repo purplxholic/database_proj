@@ -19,7 +19,8 @@ from django.contrib import admin
 from . import views
 
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
+    url(r'^$', include('signup.urls')),
+    url(r'^home/$', views.index, name='index'),
     url(r'^admin/', admin.site.urls),
     url(r'^music/', include('feedback_rating.urls')),
     url(r'^statistics/', include('statistics.urls')),
