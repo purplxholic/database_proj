@@ -28,7 +28,12 @@ def signup(request):
     return render(request, 'signup/signup.html', {'form': form})
 
 
+# def generate_uid():
+#     allchar = string.ascii_letters + string.punctuation + string.digits
+#     uid = "".join(choice(allchar) for x in range(randint(10,10)))
+#     return uid
+
 def generate_uid():
-    allchar = string.ascii_letters + string.punctuation + string.digits
-    uid = "".join(choice(allchar) for x in range(randint(10,10)))
+    n = 10
+    uid = ''.join(["%s" % randint(0, 9) for num in range(0, n)])
     return uid
