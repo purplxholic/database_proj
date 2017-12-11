@@ -13,3 +13,4 @@ name = "pypi"
 
 django = "*"
 mysql-python = "*"
+django-widget-tweaks = "*"
