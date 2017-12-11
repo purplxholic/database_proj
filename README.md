@@ -34,6 +34,7 @@ exit
 #install python and django
 sudo apt-get install python
 pip install Django
+pip install django-widget-tweaks
 
 #run
 python manage.py runserver
@@ -43,4 +44,9 @@ python manage.py runserver
 # Paths 
 
 browse/ - Music browser <br>
-music/\<music sid\> - Info of the music, with the feedback and ratings for the music 
+inventory/ - Music inventory <br>
+music/\<music sid\> - Info of the music, with the feedback and ratings for the music <br>
+myrecord/\<user uid\> - User record <br>
+order/ - Order information <br>
+signup/ - New user signup <br>
+statistics/ - Music store statistics

@@ -19,7 +19,7 @@ def order(request):
                     "VALUES "+
                     "(%s,%s)",[sid,uid]
                 )
-            return redirect('/myrecord')
+            return redirect('/myrecord/' + uid)
     else:
         form = OrderForm()
     return render(request, 'order/order.html', {'form': form})

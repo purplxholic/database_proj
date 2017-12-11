@@ -54,14 +54,5 @@ class BrowseResultsView(ListView):
             cursor.execute(query + conditions)
             songs = dictfetchall(cursor, fetchall = True)
             
-        #     for feedback in feedbacks: # iterate through feedbacks for a particular song to get ratings
-        #         fuid = feedback['uid'] # the person who made the feedback
-        #         cursor.execute("SELECT AVG(score) FROM Ratings GROUP BY fuid,sid HAVING fuid = %s AND sid = %s", [fuid, pk])
-        #         r = cursor.fetchone()
-        #         if r:
-        #             feedback['rating'] = '{:.1f}'.format(r[0])
-        #         else:
-        #             feedback['rating'] = 0.0
-        
         return songs
 

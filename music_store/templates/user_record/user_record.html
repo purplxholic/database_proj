@@ -7,7 +7,17 @@
 
 <h1>Your Record</h1>
 <ul>
-{% for song in object_list %}
+{% for detail in details %}
+    <!-- <li>{{ detail.uid }}</li> -->
+    <li>Username: {{ detail.login }}</li>
+    <li>Password: {{ detail.password }}</li>
+{% empty %}
+    <li>No user details.</li>
+{% endfor %}
+</ul>
+<h2>Purchases</h2>
+<ul>
+{% for song in purchases %}
     <li>{{ song.song_name }}</li>
     <ul>
         <li>Artist: {{ song.artist }}</li>
@@ -17,5 +27,18 @@
     </ul>
 {% empty %}
     <li>No songs yet.</li>
+{% endfor %}
+</ul>
+<h2>Feedbacks</h2>
+<ul>
+{% for feedback in feedbacks %}
+    <li>{{ feedback.name }}</li>
+    <ul>
+        <li>Score: {{ feedback.score }}</li>
+        <li>Post Date: {{ feedback.postDate }}</li>
+        <li>Comments: {{ feedback.comments }}</li>
+    </ul>
+{% empty %}
+    <li>No feedbacks yet.</li>
 {% endfor %}
 </ul>

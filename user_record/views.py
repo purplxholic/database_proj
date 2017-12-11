@@ -6,40 +6,54 @@ from django.db import connection
 from django.views.generic import ListView
 
 from music_store.utils import dictfetchall
-uid = '5367111875'
+# uid = '5367111875' 
 # Create your views here.
-def user_purchases():
+def user_purchases(uid):
     with connection.cursor() as cursor:
         cursor.execute(
-            "select s.name as song_name, a.name as artist, g.name as genre, s.`releaseDate` as rd "+
+            "select s.name as song_name, a.name as artist, g.name as genre, s.`releaseDate` as rd, s.numDownloads "+
             "from purchases p, songs s, genres as g, artists as a "+
             "where "+
-            "p.uid='5367111875' and s.sid=p.sid "+
+            "p.uid='" + uid + "' and s.sid=p.sid "+
             "and s.aid = a.aid "+
             "and s.gid = g.gid"
         )
         purchases = dictfetchall(cursor,fetchall=True)
     return purchases
 
-def user_details():
+def user_details(uid):
     with connection.cursor() as cursor:
         cursor.execute(
         "select * "+
         "from users u "+
-        "where u.uid='5367111875'"
+        "where u.uid='" + uid + "'"
         )
-        purchases = dictfetchall(cursor,fetchall=True)
-    return purchases
+        details = dictfetchall(cursor,fetchall=True)
+    return details
+
+def user_feedbacks(uid):
+    with connection.cursor() as cursor:
+        cursor.execute(
+            "SELECT * FROM feedbacks INNER JOIN songs WHERE feedbacks.sid = songs.sid AND uid='" + uid + "'" 
+        )
+        feedbacks = dictfetchall(cursor,fetchall=True)
+    return feedbacks
 
 
 class User_Record_View(ListView):
     template_name = "user_record/user_record.html"
 
-
     def get_queryset(self):
-        purchases = user_purchases()
-        ud = user_details()
-
+        uid = self.kwargs['pk']
+        purchases = user_purchases(uid)
 
         return purchases
+
+    def get_context_data(self, **kwargs):
+        context = super(User_Record_View, self).get_context_data(**kwargs)
+        uid = self.kwargs['pk']
+        context['details'] = user_details(uid)
+        context['purchases'] = user_purchases(uid)
+        context['feedbacks'] = user_feedbacks(uid)
+        return context
 
