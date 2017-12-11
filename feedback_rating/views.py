@@ -36,10 +36,14 @@ def music_info(request, pk):
 	# for testing:
 	# DELETE FROM Feedbacks WHERE uid='0928753099';
 	# DELETE FROM Ratings WHERE uid='0928753099';
-	uid = '0928753099'
+	
 	sorting = ''
 
 	with connection.cursor() as cursor:
+		username = str(request.user)
+		cursor.execute("SELECT uid FROM Users WHERE login = %s", [username])
+		uid = cursor.fetchone()
+
 		if request.method == 'POST':
 			if 'useless-btn' in request.POST:
 				cursor.execute("INSERT INTO Ratings (uid, fuid, sid, score) VALUES (%s, %s, %s, %s)", [uid, request.POST['useless-btn'], pk, '0'])
