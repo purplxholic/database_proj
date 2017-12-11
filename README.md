@@ -50,4 +50,4 @@ myrecord/\<user uid\> - User record <br>
 order/ - Order information <br>
 signup/ - New user signup <br>
 statistics/ - Music store statistics <br>
-Recommender/<user id>/<song id> - Recommendations 
+Recommender/\<user id\>/\<song id\> - Recommendations 
