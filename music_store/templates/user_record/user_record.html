@@ -3,8 +3,10 @@
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>User Record</title>
 </head>
-
+<body>
+<div class='container'>
 <h1>Your Record</h1>
 <ul>
 {% for detail in details %}
@@ -16,29 +18,45 @@
 {% endfor %}
 </ul>
 <h2>Purchases</h2>
-<ul>
-{% for song in purchases %}
-    <li>{{ song.song_name }}</li>
-    <ul>
-        <li>Artist: {{ song.artist }}</li>
-        <li>Genre: {{ song.genre }}</li>
-        <li>Number of downloads: {{ song.numDownloads }}</li>
-        <li>Release Date: {{ song.rd }}</li>
-    </ul>
-{% empty %}
-    <li>No songs yet.</li>
-{% endfor %}
-</ul>
+<table class="table">
+  <tr>
+    <th>Name</th>
+    <th>Artist</th>
+    <th>Genre</th>
+    <th>Release Date</th>
+    <th>Number of downloads</th>
+  </tr>
+  {% for song in purchases %}
+  <tr>
+    <td>{{ song.song_name }}</td>
+    <td>{{ song.artist }}</td>
+    <td>{{ song.genre }}</td>
+    <td>{{ song.rd }}</td>
+    <td>{{ song.numDownloads }}</td>
+  </tr>
+  {% empty %}
+  <div class="alert alert-warning">No songs yet.</div>
+  {% endfor %}
+</table>
+<br>
 <h2>Feedbacks</h2>
-<ul>
-{% for feedback in feedbacks %}
-    <li>{{ feedback.name }}</li>
-    <ul>
-        <li>Score: {{ feedback.score }}</li>
-        <li>Post Date: {{ feedback.postDate }}</li>
-        <li>Comments: {{ feedback.comments }}</li>
-    </ul>
-{% empty %}
-    <li>No feedbacks yet.</li>
-{% endfor %}
-</ul>
+
+<table class="table">
+  <tr>
+    <th>Score</th>
+    <th>Post Date</th>
+    <th>Comments</th>
+  </tr>
+  {% for feedback in feedbacks %}
+  <tr>
+    <td>{{ feedback.score }}</td>
+    <td>{{ feedback.postDate }}</td>
+    <td>{{ feedback.comments }}</td>
+  </tr>
+  {% empty %}
+  <div class="alert alert-warning">No Feedbacks yet.</div>
+  {% endfor %}
+</table>
+
+</div>
+</body>
