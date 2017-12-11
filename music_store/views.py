@@ -9,8 +9,8 @@ from django.db import connection
 
 def index(request):
     user = {}
-    with connection.cursor() as cursor:    	
-        username = str(request.user)        
+    with connection.cursor() as cursor:
+        username = str(request.user)
         cursor.execute("SELECT uid FROM Users WHERE login = %s", [username])
         uid = cursor.fetchone()
         user['username'] = username

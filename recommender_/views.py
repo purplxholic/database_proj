@@ -16,11 +16,11 @@ def recommend(uid,sid):
     with connection.cursor() as cursor:
 
         cursor.execute(
-       "SELECT g.name as genre, a.name artist, s.sid, s.name, s.aid, s.gid, s.releaseDate, s.numDownloads, s.numLicense " 
-       "FROM artists as a, genres as g, songs as s, (SELECT DISTINCT sid  FROM Purchases, (SELECT uid FROM Purchases " 
-													 "WHERE Purchases.sid = %s AND Purchases.uid <> %s) AS similar_users " 
+       "SELECT g.name as genre, a.name artist, s.sid, s.name, s.aid, s.gid, s.releaseDate, s.numDownloads, s.numLicense "
+       "FROM Artists as a, Genres as g, Songs as s, (SELECT DISTINCT sid  FROM Purchases, (SELECT uid FROM Purchases "
+													 "WHERE Purchases.sid = %s AND Purchases.uid <> %s) AS similar_users "
 			             "WHERE Purchases.uid = similar_users.uid AND Purchases.sid <> %s) AS recommendations "
-       "WHERE s.sid = recommendations.sid AND s.aid=a.aid AND s.gid=g.gid " 
+       "WHERE s.sid = recommendations.sid AND s.aid=a.aid AND s.gid=g.gid "
        "ORDER by s.numDownloads DESC",[sid,uid,sid]
         )
         songs = dictfetchall(cursor,fetchall=True)
@@ -39,4 +39,3 @@ class RecommenderView(ListView):
         sid = self.kwargs['sk']
         songs = recommend(uid,sid)
         return songs
-

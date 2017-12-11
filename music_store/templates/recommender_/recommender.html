@@ -2,20 +2,33 @@
 
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Songs you may like</title>
 </head>
 
-<h1>Songs you may like</h1>
-<ul>
-{% for song in object_list %}
-    <li>{{ song.name }}</li>
-    <ul>
-        <li>Artist: {{ song.artist }}</li>
-        <li>Genre: {{ song.genre }}</li>
-        <li>Number of downloads: {{ song.numDownloads }}</li>
-        <li>Release Date: {{ song.releaseDate }}</li>
-    </ul>
-{% empty %}
-    <li>No songs yet.</li>
-{% endfor %}
-</ul>
+
+<body>
+  <div class="padding-top"></div>
+    <div class="container">
+      <h1>Songs you may like</h1>
+      <table class="table">
+        <tr>
+          <th>Name</th>
+          <th>Artist</th>
+          <th>Genre</th>
+          <th>Release Date</th>
+          <th>Number of downloads</th>
+        </tr>
+        {% for song in object_list %}
+        <tr>
+          <td>{{ song.song_name }}</td>
+          <td>{{ song.artist_name }}</td>
+          <td>{{ song.genre_name }}</td>
+          <td>{{ song.releaseDate }}</td>
+          <td>{{ song.numDownloads }}</td>
+        </tr>
+        {% empty %}
+        <div class="alert alert-danger">Sorry! We couldn't find any songs for you :(</div>
+        {% endfor %}
+      </table>
+  </div>
+</body>
