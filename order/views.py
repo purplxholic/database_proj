@@ -10,10 +10,14 @@ def order(request):
         form = OrderForm(request.POST)
         if form.is_valid():
 
-            uid = str(form.cleaned_data.get('uid'))
             sid = str(form.cleaned_data.get('sid'))
 
             with connection.cursor() as cursor:
+                username = str(request.user)
+                cursor.execute("SELECT uid FROM Users WHERE login = %s", [username])
+                uid = cursor.fetchone()
+                uid = str(uid[0])
+
                 cursor.execute(
                     "INSERT INTO Purchases (sid,uid) "+
                     "VALUES "+

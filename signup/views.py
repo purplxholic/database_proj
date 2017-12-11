@@ -22,7 +22,7 @@ def signup(request):
                     "VALUES "+
                     "(%s,%s,%s)",[uid,username,raw_password]
                 )
-            return redirect('/browse')
+            return redirect('/home')
     else:
         form = SignUpForm()
     return render(request, 'signup/signup.html', {'form': form})
