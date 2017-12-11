@@ -31,11 +31,6 @@ def music_info(request, pk):
 	sort_form = SortForm()
 
 	numFeedbacks = 0
-
-	# hardcoded for now as the user login system has not been implemented
-	# for testing:
-	# DELETE FROM Feedbacks WHERE uid='0928753099';
-	# DELETE FROM Ratings WHERE uid='0928753099';
 	
 	sorting = ''
 
@@ -43,6 +38,7 @@ def music_info(request, pk):
 		username = str(request.user)
 		cursor.execute("SELECT uid FROM Users WHERE login = %s", [username])
 		uid = cursor.fetchone()
+		uid = int(uid[0])
 
 		if request.method == 'POST':
 			if 'useless-btn' in request.POST:

@@ -16,7 +16,4 @@ def index(request):
         user['username'] = username
         user['uid'] = int(uid[0])
 
-        print user
-        print type(user['uid'])
-
     return render(request, "music_store/index.html", {'user':user})
