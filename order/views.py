@@ -23,6 +23,10 @@ def order(request):
                     "VALUES "+
                     "(%s,%s)",[sid,uid]
                 )
+
+                cursor.execute(
+                    "UPDATE Songs SET numDownloads = numDownloads+1 WHERE sid = %s", [sid]
+                )
             return redirect('/myrecord/' + uid)
     else:
         form = OrderForm()
