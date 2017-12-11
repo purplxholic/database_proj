@@ -8,24 +8,12 @@ from django.views.generic import ListView
 from music_store.utils import dictfetchall
 
 # Create your views here.
-def recommend():
+def recommend(uid,sid):
 
-    sid = '0000000001'
-    uid = '5367111875'
+    sid = sid
+    uid = uid
 
     with connection.cursor() as cursor:
-        # cursor.execute(
-        # "CREATE view recommendations as"+
-        # "SELECT DISTINCT sid  FROM Purchases, (SELECT uid FROM Purchases "+
-        #                         "WHERE Purchases.sid = '0000000001' AND Purchases.uid <> '1543016742') AS similar_users "+
-        # "WHERE Purchases.uid = similar_users.uid AND Purchases.sid <> '0000000001'"
-        # )
-        # cursor.execute(
-        # "SELECT s.sid, s.name, s.aid, s.gid, s.releaseDate, s.numDownloads, s.numLicense "+
-        # "FROM songs as s "+
-        # "RIGHT JOIN recommendations ON s.sid = recommendations.sid "+
-        # "ORDER by s.numDownloads DESC"
-        # )
 
         cursor.execute(
        "SELECT g.name as genre, a.name artist, s.sid, s.name, s.aid, s.gid, s.releaseDate, s.numDownloads, s.numLicense " 
@@ -47,6 +35,8 @@ class RecommenderView(ListView):
 
 
     def get_queryset(self):
-        songs = recommend()
+        uid = self.kwargs['pk']
+        sid = self.kwargs['sk']
+        songs = recommend(uid,sid)
         return songs
 
