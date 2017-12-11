@@ -9,6 +9,9 @@ sudo apt-get update
 sudo apt-get install mysql-server
 mysql_secure_installation
 
+# cd into directory
+cd database_proj
+
 # give PRIVILEGES to guest user on command line
 mysql -u root -p
 CREATE USER 'guest'@'localhost' IDENTIFIED BY 'password';
@@ -18,16 +21,26 @@ FLUSH PRIVILEGES;
 #create database
 CREATE DATABASE music_store
 
+#create tables
+source schema.sql
+
+#populate with dummy data
+source insert_into_schema.sql
+source Recommender_cases.sql
+
+#quit mysql shell
+exit
+
 #install python and django
 sudo apt-get install python
 pip install Django
 
-#quit and run
+#run
 python manage.py runserver
 
 ```
 
-# Paths
+# Paths 
 
-browse/ - Browser
-music/<music sid> - Info of the music, with the feedback and ratings for the music 
+browse/ - Music browser <br>
+music/\<music sid\> - Info of the music, with the feedback and ratings for the music 
