@@ -58,5 +58,29 @@
   {% endfor %}
 </table>
 
+<br>
+<h2>Ratings</h2>
+
+<table class="table">
+  <tr>
+    <th>Username</th>
+    <th>Score</th>
+    <th>Post Date</th>
+    <th>Comments</th>
+    <th>Usefulness Rating</th>
+  </tr>
+  {% for rating in ratings %}
+  <tr>
+    <td>{{ rating.username }}</td>
+    <td>{{ rating.score }}</td>
+    <td>{{ rating.postDate }}</td>
+    <td>{{ rating.comments }}</td>
+    <td>{{ rating.usefulness }}</td>
+  </tr>
+  {% empty %}
+  <div class="alert alert-warning">No Ratings yet.</div>
+  {% endfor %}
+</table>
+
 </div>
 </body>

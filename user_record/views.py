@@ -39,6 +39,14 @@ def user_feedbacks(uid):
         feedbacks = dictfetchall(cursor,fetchall=True)
     return feedbacks
 
+def user_ratings(uid):
+    with connection.cursor() as cursor:
+        cursor.execute(
+            "SELECT r.uid AS uid, r.fuid as fuid, r.sid as sid, r.score as usefulness, f.score as score, f.comments as comments, f.postDate as postDate, u.login as username FROM ratings r INNER JOIN feedbacks f ON f.uid = r.fuid AND f.sid = r.sid INNER JOIN users u on f.uid = u.uid AND r.uid='" + uid + "'" 
+        )
+        ratings = dictfetchall(cursor,fetchall=True)
+    return ratings
+
 
 class User_Record_View(ListView):
     template_name = "user_record/user_record.html"
@@ -55,5 +63,7 @@ class User_Record_View(ListView):
         context['details'] = user_details(uid)
         context['purchases'] = user_purchases(uid)
         context['feedbacks'] = user_feedbacks(uid)
+        context['ratings'] = user_ratings(uid)
+        print context['ratings']
         return context
 
