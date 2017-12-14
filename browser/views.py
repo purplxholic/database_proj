@@ -34,8 +34,8 @@ class BrowseResultsView(ListView):
         return context
 
     def get_queryset(self):
-        query = "SELECT Songs.name as song_name, Artists.name as artist_name, Genres.name as genre_name, Songs.releaseDate from Songs INNER JOIN Artists INNER JOIN Genres"
-        conditions = " WHERE Songs.aid = Artists.aid AND Songs.gid = Genres.gid"
+        query = "SELECT Songs.name as song_name, Artists.name as artist_name, Genres.name as genre_name, Songs.releaseDate, Score.avg_score from Songs INNER JOIN Artists INNER JOIN Genres INNER JOIN (SELECT AVG(score) as avg_score, sid FROM Feedbacks GROUP BY uid,sid) as Score"
+        conditions = " WHERE Songs.aid = Artists.aid AND Songs.gid = Genres.gid AND Score.sid = Songs.sid" 
         name = self.request.GET.get('Name') 
         if (name is not ""):
             conditions += " AND Songs.name LIKE '%%" + name + "%%'"
@@ -49,9 +49,11 @@ class BrowseResultsView(ListView):
         if (genre is not ""):
             if (conditions is not ""):
                 conditions += " AND Genres.name LIKE '%%" + genre + "%%'"
+            
+        sort = " ORDER BY avg_score DESC"
 
         with connection.cursor() as cursor:
-            cursor.execute(query + conditions)
+            cursor.execute(query + conditions + sort)
             songs = dictfetchall(cursor, fetchall = True)
             
         return songs
