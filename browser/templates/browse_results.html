@@ -16,6 +16,7 @@
           <th>Artist</th>
           <th>Genre</th>
           <th>Release Date</th>
+          <th>Feedback</th>
         </tr>
         {% for song in object_list %}
         <tr>
@@ -23,6 +24,7 @@
           <td>{{ song.artist_name }}</td>
           <td>{{ song.genre_name }}</td>
           <td>{{ song.releaseDate }}</td>
+          <td>{{ song.avg_score }}</td>
         </tr>
         {% empty %}
         <div class="alert alert-danger">No songs yet.</div>

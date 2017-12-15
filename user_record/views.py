@@ -64,6 +64,5 @@ class User_Record_View(ListView):
         context['purchases'] = user_purchases(uid)
         context['feedbacks'] = user_feedbacks(uid)
         context['ratings'] = user_ratings(uid)
-        print context['ratings']
         return context
 
