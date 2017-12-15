@@ -68,12 +68,29 @@ Point 9: music/- Info of the music, with the feedback and ratings for the music
 Point 10: Recommender/\<user id\>/\<song id\> - Recommendations
 
 Point 11: statistics/ - Music store statistics
---add on: will inform user if cannot return all results
+
+* add on: will inform user if cannot return all results
+
+## Extras that we wanted to do but couldn't
+1. Create a playlist (although this is possible to built from ```Purchases``` Table)
+2. Loading real songs (copyright issues of course!)
+
+# GUI
+
+GUI is simple, clear and self-explanatory. Used Bootstrap with django-widget-tweaks for forms
+
+# Git
+
+We all use Git-tracking system - either through Git on Terminal or Github Desktop. Each of us have our own branches where we commited to first before merging.
 
 # What We learnt
 1. Always update your branches
 
 The master branch is constantly being updated. To prevent overwrites, always ```git pull``` before ```git merge```. If you are not confident, do a pull request and have someone merging.
+
+Branch everthing because you would not want to accidentally overwrite your teammate's code halfway! Esp during early stages to get a controlled environemnt as you code.
+
+We also learnt to always git push. 2 of us are using VM to do Djano and this project and both of our VMs crashed and got into trouble. Our pushed codes became our latest version of the code when we got back our VMs.
 
 2. Django runs on apps concept
 
@@ -100,13 +117,13 @@ It is better to look around their documentation. For example, their form views a
 
 ```HttpResponseRedirect(url)``` : redirects to targetted url
 
-```redner(request,html file,input)``` : takes in an input for the Django template in {} form and redirects to specified .html file
+```renders(request,html file,input)``` : input used in the Django template inside ```{}``` and redirects to specified .html file
 
 8. Template syntax
 
-```{% %}``` -> you are doing some function or importing
+```{% %}``` -> you are doing some function or importing something to the template
 
-*it is worth nothing that Django's template is limited in ways of access lists
+* it is worth noting that Django's template is limited in ways of access lists
 
 You can't access using index
 ```
@@ -116,6 +133,8 @@ You can't access using index
 #allowed
 {% for r in list.1 %}
 ```
-Indexes **must be** hardcoded. Hence, you would need to find ways to go around it, like restructuring your lists or writing customer filters [eg filter](https://djangosnippets.org/snippets/2740/)
+Indexes **must be** hardcoded. Hence, you would need to find ways to go around it, like restructuring your lists or writing customer filters. [An example filter](https://djangosnippets.org/snippets/2740/)
 
 ```{{ }}``` -> you are putting stuff from input from views.py
+
+Funfact (well to me) : Django's template syntax reminds me of VBA x Python
