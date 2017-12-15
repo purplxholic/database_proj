@@ -23,6 +23,7 @@ CREATE TABLE Songs (sid CHAR(20) PRIMARY KEY,
 
 CREATE TABLE Purchases (uid CHAR(20),
 						sid CHAR(20),
+						purchasedDate DATE NOT NULL,
 	                    PRIMARY KEY (uid, sid),
 	                    FOREIGN KEY (uid) REFERENCES Users (uid),
 	                    FOREIGN KEY (sid) REFERENCES Songs (sid));
@@ -58,5 +59,3 @@ BEGIN
 	END IF;
 END;//
 DELIMITER ;
-
-
