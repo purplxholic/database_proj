@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <head>
-  <title>Top {{ no }} {{ type }}</title>
+  <title>{{ month }}th Month for Top {{ no }} {{ type }}</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   {% load static %}
   <link rel="stylesheet" type="text/css" href="{% static 'css/top.css' %}">
@@ -38,7 +38,7 @@
       </table>
       <br>
       {% if exceeded_s %}
-        <div class="alert alert-danger">class="table"
+        <div class="alert alert-danger">
           <p> Oops! You requested for too many returns. We could only return the top {{ query_length_s }}.</p>
         </div>
       {% endif %}

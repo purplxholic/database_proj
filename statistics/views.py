@@ -37,9 +37,9 @@ def stats_choice(request,choice,top_no,month):
         results_a=[]
         results_g=[]
         results_s, exceeded_s, query_length_s = song_stats(top_no,month)
-        results_a, exceeded_a, query_length_a = artist_stats(top_no)
-        results_g, exceeded_g, query_length_g = genre_stats(top_no)
-        context = {"results_s" : results_s,"results_a" : results_a,"results_g" : results_g,"correct_req":correct_req,"type":choice,"no":top_no,"exceeded_s":exceeded_s,"exceeded_a":exceeded_a,"exceeded_g":exceeded_g,"query_length_s":query_length_s,"query_length_a":query_length_a,"query_length_g":query_length_g}
+        results_a, exceeded_a, query_length_a = artist_stats(top_no,month)
+        results_g, exceeded_g, query_length_g = genre_stats(top_no,month)
+        context = {"results_s" : results_s,"results_a" : results_a,"results_g" : results_g,"correct_req":correct_req,"type":choice,"no":top_no,"exceeded_s":exceeded_s,"exceeded_a":exceeded_a,"exceeded_g":exceeded_g,"query_length_s":query_length_s,"query_length_a":query_length_a,"query_length_g":query_length_g,'month':month}
 
     else:
 
@@ -48,10 +48,10 @@ def stats_choice(request,choice,top_no,month):
             results, exceeded, query_length= song_stats(top_no,month)
         elif choice == "artist":
 
-            results, exceeded, query_length = artist_stats(top_no)
+            results, exceeded, query_length = artist_stats(top_no.month)
         elif choice == "genre":
 
-            results, exceeded, query_length = genre_stats(top_no)
+            results, exceeded, query_length = genre_stats(top_no,month)
         else:
             correct_req = False
             results = "Invalid Choice. Your choice was " + choice + ". Available options: song,artist,genre and all. "
@@ -59,43 +59,50 @@ def stats_choice(request,choice,top_no,month):
         context = {"results" : results,"correct_req":correct_req,"type":choice,"no":top_no,"exceeded":exceeded,"query_length":query_length}
 
     if month == 'all':
-        # print context['results']
+
         return render(request,'statistics/allmonth_top.html',context)
     return render(request,'statistics/top.html',context)
 #displays user stated number of top songs
 def song_stats(top_no,month):
-    song_names = []
-    query_length = int(top_no)
-    exceeded = False
-    print query_length
+
+
     with connection.cursor() as cursor:
         if month == 'all':
 
             allmonth_result = []
+            exceeded = []
+            qmsg = []
             for i in range(1,13):
                 song_names = []
                 query_length = int(top_no)
-                # print "SELECT S.name FROM Purchases P, Songs S WHERE P.sid = S.sid AND month(P.purchasedDate) = %s GROUP BY P.sid ORDER BY COUNT(*) DESC;",[i]
+
                 cursor.execute("SELECT S.name FROM Purchases P, Songs S WHERE P.sid = S.sid AND month(P.purchasedDate) = (%s) GROUP BY P.sid ORDER BY COUNT(*) DESC;",[i])
                 results = cursor.fetchall()
-                # print len(results),query_length
+
                 if (len(results) < query_length):
                     query_length = len(results)
-                    # print query_length
-                    exceeded = True
+
+                    exceeded.append(True)
+                else:
+                    exceeded.append(False)
 
                 #results returned should be in ((xxx),(yyy))
 
                 for i in range(query_length):
                     name = results[i][0]
-                    # print results[0]
+
                     song_names.append(name)
 
-                print(results)
+                #append results
                 allmonth_result.append(song_names)
+                #append length to show Top no. that could be returned
+                qmsg.append(str(query_length))
 
-            return allmonth_result, exceeded, str(query_length)
+            return allmonth_result, exceeded, qmsg
         else:
+            song_names = []
+            query_length = int(top_no)
+            exceeded = False
             cursor.execute("SELECT S.name FROM Purchases P, Songs S WHERE P.sid = S.sid AND month(P.purchasedDate) = (%s) GROUP BY P.sid ORDER BY COUNT(*) DESC;",[month])
             results = cursor.fetchall() # get all the results
             # print(results)
@@ -112,41 +119,110 @@ def song_stats(top_no,month):
             return song_names,exceeded, str(query_length)
 
 #displays user stated number of top artists
-def artist_stats(top_no):
-    artist_names = []
-    query_length = int(top_no)
-    exceeded = False
+#SELECT A.name FROM Purchases P, Songs S, Artists A WHERE P.sid = S.sid AND S.aid = A.aid GROUP BY A.aid ORDER BY COUNT(*) DESC"
+def artist_stats(top_no,month):
     with connection.cursor() as cursor:
-        cursor.execute("SELECT A.name FROM Purchases P, Songs S, Artists A WHERE P.sid = S.sid AND S.aid = A.aid GROUP BY A.aid ORDER BY COUNT(*) DESC")
-        results = cursor.fetchall() # get all the results
+        if month == 'all':
 
-        #to handle if requested no. of top exceeds queried number
-        if (len(results) < query_length):
-            query_length = len(results)
-            exceeded = True
+            allmonth_result = []
+            exceeded = []
+            qmsg = []
+            for i in range(1,13):
+                song_names = []
+                query_length = int(top_no)
 
-        for i in range(query_length):
-            name = results[i][0]
-            artist_names.append(name)
+                cursor.execute("SELECT A.name FROM Purchases P, Songs S, Artists A WHERE P.sid = S.sid AND S.aid = A.aid AND month(P.purchasedDate) = (%s) GROUP BY A.aid ORDER BY COUNT(*) DESC;",[i])
+                results = cursor.fetchall()
 
-    return artist_names,exceeded, str(query_length)
+                if (len(results) < query_length):
+                    query_length = len(results)
+
+                    exceeded.append(True)
+                else:
+                    exceeded.append(False)
+
+                #results returned should be in ((xxx),(yyy))
+
+                for i in range(query_length):
+                    name = results[i][0]
+
+                    song_names.append(name)
+
+                #append results
+                allmonth_result.append(song_names)
+                #append length to show Top no. that could be returned
+                qmsg.append(str(query_length))
+
+            return allmonth_result, exceeded, qmsg
+        else:
+            song_names = []
+            query_length = int(top_no)
+            exceeded = False
+            cursor.execute("SELECT A.name FROM Purchases P, Songs S, Artists A WHERE P.sid = S.sid AND S.aid = A.aid AND month(P.purchasedDate) = (%s) GROUP BY A.aid ORDER BY COUNT(*) DESC;",[month])
+            results = cursor.fetchall() # get all the results
+            # print(results)
+            #to handle if requested no. of top exceeds queried number
+            if (len(results) < query_length):
+                query_length = len(results)
+                exceeded = True
+
+            #results returned should be in ((xxx),(yyy))
+            for i in range(query_length):
+                name = results[i][0]
+                song_names.append(name )
+
+            return song_names,exceeded, str(query_length)
 
 #displays user stated number of top genre
-def genre_stats(top_no):
-    genre_names = []
-    query_length = int(top_no)
-    exceeded = False
+def genre_stats(top_no,month):
     with connection.cursor() as cursor:
-        cursor.execute("SELECT G.name FROM Purchases P, Songs S, Genres G WHERE P.sid = S.sid AND G.gid = S.gid GROUP BY G.gid ORDER BY COUNT(*) DESC")
-        results = cursor.fetchall() # get all the results
+        if month == 'all':
 
-        #to handle if requested no. of top exceeds queried number
-        if (len(results) < query_length):
-            query_length = len(results)
-            exceeded = True
+            allmonth_result = []
+            exceeded = []
+            qmsg = []
+            for i in range(1,13):
+                song_names = []
+                query_length = int(top_no)
 
-        for i in range(query_length):
-            name = results[i][0]
-            genre_names.append(name)
+                cursor.execute("SELECT G.name FROM Purchases P, Songs S, Genres G WHERE P.sid = S.sid AND G.gid = S.gid AND month(P.purchasedDate) = (%s) GROUP BY G.gid ORDER BY COUNT(*) DESC;",[i])
+                results = cursor.fetchall()
 
-    return genre_names,exceeded, str(query_length)
+                if (len(results) < query_length):
+                    query_length = len(results)
+
+                    exceeded.append(True)
+                else:
+                    exceeded.append(False)
+
+                #results returned should be in ((xxx),(yyy))
+
+                for i in range(query_length):
+                    name = results[i][0]
+
+                    song_names.append(name)
+
+                #append results
+                allmonth_result.append(song_names)
+                #append length to show Top no. that could be returned
+                qmsg.append(str(query_length))
+
+            return allmonth_result, exceeded, qmsg
+        else:
+            song_names = []
+            query_length = int(top_no)
+            exceeded = False
+            cursor.execute("SELECT G.name FROM Purchases P, Songs S, Genres G WHERE P.sid = S.sid AND G.gid = S.gid AND month(P.purchasedDate) = (%s) GROUP BY G.gid ORDER BY COUNT(*) DESC;",[month])
+            results = cursor.fetchall() # get all the results
+            # print(results)
+            #to handle if requested no. of top exceeds queried number
+            if (len(results) < query_length):
+                query_length = len(results)
+                exceeded = True
+
+            #results returned should be in ((xxx),(yyy))
+            for i in range(query_length):
+                name = results[i][0]
+                song_names.append(name )
+
+            return song_names,exceeded, str(query_length)
