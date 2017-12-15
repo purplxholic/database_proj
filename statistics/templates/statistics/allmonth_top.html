@@ -19,7 +19,13 @@
 
 
       <div class ="row">
+
         <div class="col-sm-4">
+          {% if exceeded_s %}
+            <div class="alert alert-danger">
+              <p><span class="glyphicon glyphicon-exclamation-sign"></span> Not all returned results could hit the top number you wanted.</p>
+            </div>
+          {% endif %}
           {% for songs in results_s %}
         <div class="page-header padding-left">
           <h3>Songs For {{ forloop.counter }}th Month</h3>
@@ -39,15 +45,16 @@
 
         </table>
         <br>
-        {% if exceeded_s %}
-          <div class="alert alert-danger">
-            <p> Oops! You requested for too many returns. We could only return the top {{ query_length_s }}.</p>
-          </div>
-        {% endif %}
+
         {% endfor %}
       </div>
 
     <div class="col-sm-4">
+      {% if exceeded_a %}
+        <div class="alert alert-danger">
+          <p><span class="glyphicon glyphicon-exclamation-sign"></span> Not all returned results could hit the top number you wanted.</p>
+        </div>
+      {% endif %}
       {% for artist in results_a %}
       <div class="page-header padding-left">
         <h3>Artists For {{ forloop.counter }}th Month</h3>
@@ -67,14 +74,14 @@
 
       </table>
       <br>
-      {% if exceeded_a %}
-        <div class="alert alert-danger">
-          <p> Oops! You requested for too many returns. We could only return the top {{ query_length_a }}.</p>
-        </div>
-      {% endif %}
     {% endfor %}
   </div>
   <div class="col-sm-4">
+    {% if exceeded_g %}
+      <div class="alert alert-danger">
+        <p><span class="glyphicon glyphicon-exclamation-sign"></span> Not all returned results could hit the top number you wanted.</p>
+      </div>
+    {% endif %}
     {% for genres in results_g %}
     <div class="page-header padding-left">
       <h3>Genres {{ forloop.counter }}th month</h3>
@@ -94,19 +101,20 @@
 
     </table>
     <br>
-    {% if exceeded_g %}
-      <div class="alert alert-danger">
-        <p> Oops! You requested for too many returns. We could only return the top {{ query_length_g }}.</p>
-      </div>
-    {% endif %}
+
     {% endfor %}
   </div>
   </div>
 <!-- if not all  -->
     {% else %}
+    {% if exceeded %}
+      <div class="alert alert-danger">
+        <p><span class="glyphicon glyphicon-exclamation-sign"></span> Not all returned results could hit the top number you wanted.</p>
+      </div>
+    {% endif %}
       {% for result in results %}
       <div class="page-header padding-left">
-        <h3>Results for {{ type }} {{ forloop.counter }}th month</h3>
+        <h3>Results for {{ type }} for {{ forloop.counter }}th month</h3>
       </div>
       <table class="table">
         <tr>
@@ -121,11 +129,7 @@
         </tr>
         {% endfor %}
       </table>
-      <!-- {% if exceeded.forloop.counter %}
-        <div class="alert alert-danger">
-          <p> Oops! You requested for too many returns. We could only return the top {{ query_length.forloop.counter }}.</p>
-        </div>
-      {% endif %} -->
+
     {% endfor %}
     {% endif %}
 <!-- if error -->

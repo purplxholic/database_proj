@@ -48,7 +48,7 @@ def stats_choice(request,choice,top_no,month):
             results, exceeded, query_length= song_stats(top_no,month)
         elif choice == "artist":
 
-            results, exceeded, query_length = artist_stats(top_no.month)
+            results, exceeded, query_length = artist_stats(top_no,month)
         elif choice == "genre":
 
             results, exceeded, query_length = genre_stats(top_no,month)
@@ -70,7 +70,7 @@ def song_stats(top_no,month):
         if month == 'all':
 
             allmonth_result = []
-            exceeded = []
+            exceeded = False
             qmsg = []
             for i in range(1,13):
                 song_names = []
@@ -82,10 +82,7 @@ def song_stats(top_no,month):
                 if (len(results) < query_length):
                     query_length = len(results)
 
-                    exceeded.append(True)
-                else:
-                    exceeded.append(False)
-
+                    exceeded = True
                 #results returned should be in ((xxx),(yyy))
 
                 for i in range(query_length):
@@ -125,7 +122,7 @@ def artist_stats(top_no,month):
         if month == 'all':
 
             allmonth_result = []
-            exceeded = []
+            exceeded = False
             qmsg = []
             for i in range(1,13):
                 song_names = []
@@ -137,9 +134,8 @@ def artist_stats(top_no,month):
                 if (len(results) < query_length):
                     query_length = len(results)
 
-                    exceeded.append(True)
-                else:
-                    exceeded.append(False)
+                    exceeded = True
+
 
                 #results returned should be in ((xxx),(yyy))
 
@@ -179,7 +175,7 @@ def genre_stats(top_no,month):
         if month == 'all':
 
             allmonth_result = []
-            exceeded = []
+            exceeded = False
             qmsg = []
             for i in range(1,13):
                 song_names = []
@@ -190,10 +186,7 @@ def genre_stats(top_no,month):
 
                 if (len(results) < query_length):
                     query_length = len(results)
-
-                    exceeded.append(True)
-                else:
-                    exceeded.append(False)
+                    exceeded = True
 
                 #results returned should be in ((xxx),(yyy))
 
