@@ -72,24 +72,50 @@ Point 11: statistics/ - Music store statistics
 
 # What We learnt
 1. Always update your branches
+
 The master branch is constantly being updated. To prevent overwrites, always ```git pull``` before ```git merge```. If you are not confident, do a pull request and have someone merging.
 
 2. Django runs on apps concept
+
 Whenever we created a new app folder, we must remember to install it to settings.py. It's like a phone with different applications. For external libraries used, they had to be "installed" into the settings.py to import it, such as ```django-widget-tweaks```
 
 3. Be consistent on MySql syntax
+
 Ran into trouble when some of us did SELECT * FROM **artist** instead of SELECT * FROM **Artist**. It worked on one laptop but did not for the other. Might as well use the actual name
 
 4. Pycharm is amazing for generating values
 > Fast game
 
 5. When you update the schema, always inform group mates
+
 So that we would know to update our local schemas
 
 6. Django's tutorials does not cover everything
+
 It is better to look around their documentation. For example, their form views are not explicitly covered in their tutorials.
 
 7. Different ways to render
-```HttpResponse``` : most basic, renders input as paragraph
-```HttpResponseRedirect``` : redirects to targetted url
-```redner()``` : takes in an input for the Django template in {} form and redirects to specified .html file 
+
+```HttpResponse(stuff)``` : most basic, renders input as paragraph
+
+```HttpResponseRedirect(url)``` : redirects to targetted url
+
+```redner(request,html file,input)``` : takes in an input for the Django template in {} form and redirects to specified .html file
+
+8. Template syntax
+
+```{% %}``` -> you are doing some function or importing
+
+*it is worth nothing that Django's template is limited in ways of access lists
+
+You can't access using index
+```
+#not allowed
+{% for r in list[1] %}
+
+#allowed
+{% for r in list.1 %}
+```
+Indexes **must be** hardcoded. Hence, you would need to find ways to go around it, like restructuring your lists or writing customer filters [eg filter](https://djangosnippets.org/snippets/2740/)
+
+```{{ }}``` -> you are putting stuff from input from views.py
