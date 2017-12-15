@@ -4,6 +4,7 @@ from django.db import connection
 from order.forms import OrderForm
 import string
 from random import *
+import datetime
 
 def order(request):
     if request.method == 'POST':
@@ -21,7 +22,7 @@ def order(request):
                 cursor.execute(
                     "INSERT INTO Purchases (sid,uid) "+
                     "VALUES "+
-                    "(%s,%s)",[sid,uid]
+                    "(%s,%s,%s)",[sid,uid,datetime.date.today().strftime("%Y-%m-%d")]
                 )
 
                 cursor.execute(

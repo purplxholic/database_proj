@@ -51,7 +51,7 @@ def newMusic(sid,name,aid,gid,releaseDate,numDownloads,numLicense):
     good = True
     try:
         with connection.cursor() as cursor:
-            cursor.execute("INSERT INTO Songs VALUES (%s,%s,%s,%s,%s,%s,%s);",[sid,name,aid,gid,releaseDate,numDownloads,numLicense]) #LOL
+            cursor.execute("INSERT INTO Songs VALUES (%s,%s,%s,%s,%s,%s,%s);",[sid,name,aid,gid,releaseDate,numDownloads,numLicense]) 
         message = "Successful insertion"
     except Exception as e:
         # raise
