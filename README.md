@@ -2,7 +2,7 @@
 
 The database name is configured as `music_store` in the `/music_store/settings.py` file, so please set that as the name of your local database.
 
-Done by [Aishwarya](https://github.com/aishwaryaprabhat) , [Vanessa](https://github.com/vanJargon), [Steven](https://github.com/kong-artist) and [Zanette](https://github.com/purplxholic)
+Done by [Aishwarya 1001848](https://github.com/aishwaryaprabhat) , [Vanessa 1001827](https://github.com/vanJargon), [Steven 1003223](https://github.com/kong-artist) and [Zanette 1001845](https://github.com/purplxholic)
 
 # Instructions
 Before running the server (for linux/ubuntu):
